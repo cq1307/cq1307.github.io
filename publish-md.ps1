@@ -296,7 +296,6 @@ function New-ArticleHtml($Title, $Date, $Categories, $Summary, $BodyHtml) {
         <a href="links.html">&#21451;&#38142;</a>
         <a href="about.html">&#20851;&#20110;</a>
         <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
-        <button class="icon-button" type="button" data-theme-toggle aria-label="Toggle color mode">&#9680;</button>
       </div>
     </nav>
     <section class="post-hero">
