@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>一次字体混淆页面的分析记录 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="主导航">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="archives.html">归档</a>
+        <a href="categories.html">分类</a>
+        <a href="tags.html">标签</a>
+        <a href="links.html">友链</a>
+        <a href="about.html">关于</a>
+        <button class="icon-button" type="button" data-open-search aria-label="搜索">⌕</button>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="切换颜色模式">◐</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Web Reverse</p>
+      <h1>一次字体混淆页面的分析记录</h1>
+      <p>2026-06-29 · 约 6 分钟 · 最后更新 2026-07-07</p>
+    </section>
+  </header>
+
+  <main class="article-layout">
+    <article class="article-body" data-article>
+      <p class="notice">声明：本文是博客模板中的示例文章，用于展示排版效果和知识记录方式。</p>
+
+      <h2 id="intro">前言</h2>
+      <p>字体混淆常见于把页面中的真实字符替换成自定义字体编码，再由浏览器渲染成人眼可读的结果。分析时不要急着处理全部逻辑，先确认资源加载、字体文件和页面文本之间的关系。</p>
+
+      <h2 id="flow">分析流程</h2>
+      <p>一个稳妥的流程是先保存页面快照，再检查网络资源中的字体文件、脚本和接口返回。随后比较 DOM 文本、复制文本和截图显示，确认混淆发生在数据层还是渲染层。</p>
+      <pre><code>// 示例：记录观察点
+const checkpoints = [
+  "network fonts",
+  "dom text",
+  "rendered glyph",
+  "copy result"
+];</code></pre>
+
+      <h2 id="mapping">映射整理</h2>
+      <p>如果字体文件没有额外保护，可以通过字形顺序、轮廓相似度或手工样本建立映射。真正值得记录的是过程中的假设、证据和排除项，而不是只贴最终结果。</p>
+
+      <h2 id="summary">总结</h2>
+      <p>这类文章适合沉淀成固定模板：现象、样本、验证方法、关键截图、结论。博客后续可以把这套结构做成 Markdown 模板，写起来会更顺手。</p>
+    </article>
+
+    <aside class="toc">
+      <p>目录</p>
+      <nav data-toc></nav>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by static HTML · Inspired by Hexo Fluid · <span data-runtime></span></p>
+  </footer>
+
+  <button class="top-button" type="button" data-back-top aria-label="返回顶部">↑</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">搜索</h2>
+        <button class="icon-button" type="button" data-close-search aria-label="关闭搜索">×</button>
+      </div>
+      <label class="search-box">
+        <span>关键词</span>
+        <input type="search" data-search-input autocomplete="off">
+      </label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

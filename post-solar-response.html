@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>应急响应比赛复盘：日志与流量 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="主导航">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="archives.html">归档</a>
+        <a href="categories.html">分类</a>
+        <a href="tags.html">标签</a>
+        <a href="links.html">友链</a>
+        <a href="about.html">关于</a>
+        <button class="icon-button" type="button" data-open-search aria-label="搜索">⌕</button>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="切换颜色模式">◐</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Incident Response</p>
+      <h1>应急响应比赛复盘：日志与流量</h1>
+      <p>2026-05-18 · 约 5 分钟 · 最后更新 2026-07-07</p>
+    </section>
+  </header>
+
+  <main class="article-layout">
+    <article class="article-body" data-article>
+      <h2 id="target">目标</h2>
+      <p>复盘类文章重点不是堆答案，而是把排查路径写清楚。建议按时间线、证据来源、判断依据、误区四个维度整理。</p>
+      <h2 id="timeline">时间线</h2>
+      <p>先把关键事件归并成时间线，再回头补充来源。这样读者能迅速理解攻击面、异常点和证据之间的关系。</p>
+      <h2 id="traffic">流量观察</h2>
+      <p>流量分析适合用表格记录五元组、协议、异常字段和结论。博客模板已经准备了代码块、表格和目录样式，方便后续扩展。</p>
+      <h2 id="review">复盘清单</h2>
+      <ul>
+        <li>证据是否能互相印证</li>
+        <li>结论是否标注了来源</li>
+        <li>误判路径是否记录下来</li>
+      </ul>
+    </article>
+    <aside class="toc">
+      <p>目录</p>
+      <nav data-toc></nav>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by static HTML · Inspired by Hexo Fluid · <span data-runtime></span></p>
+  </footer>
+  <button class="top-button" type="button" data-back-top aria-label="返回顶部">↑</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">搜索</h2>
+        <button class="icon-button" type="button" data-close-search aria-label="关闭搜索">×</button>
+      </div>
+      <label class="search-box">
+        <span>关键词</span>
+        <input type="search" data-search-input autocomplete="off">
+      </label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

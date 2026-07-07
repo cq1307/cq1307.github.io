@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>CQ_ Lab - 个人技术博客</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="home">
+  <div class="progress" id="progress"></div>
+  <header class="site-header">
+    <nav class="navbar" aria-label="主导航">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">☰</button>
+      <div class="nav-menu">
+        <a class="active" href="index.html">首页</a>
+        <a href="archives.html">归档</a>
+        <a href="categories.html">分类</a>
+        <a href="tags.html">标签</a>
+        <a href="links.html">友链</a>
+        <a href="about.html">关于</a>
+        <button class="icon-button" type="button" data-open-search aria-label="搜索">⌕</button>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="切换颜色模式">◐</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <img src="assets/hero-cyber-blog.png" alt="夜间技术工作台背景" class="hero-bg">
+      <div class="hero-mask"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Reverse · CTF · Forensics · Web</p>
+        <h1>CQ_ Lab</h1>
+        <p class="subtitle"><span data-typing="时间会证明你努力"></span></p>
+      </div>
+      <a class="scroll-cue" href="#posts" aria-label="跳到文章列表">⌄</a>
+    </section>
+  </header>
+
+  <main id="posts" class="page-shell">
+    <section class="content-band">
+      <div class="section-heading">
+        <p class="eyebrow">Latest Notes</p>
+        <h2>最近文章</h2>
+      </div>
+
+      <div class="post-list" data-post-list>
+        <article class="post-card">
+          <a href="post-font-obfuscation.html">
+            <h3>一次字体混淆页面的分析记录</h3>
+            <p>从页面资源、字体映射和渲染结果入手，整理一次前端字体混淆的观察路径。</p>
+          </a>
+          <footer>
+            <span>2026-06-29</span>
+            <a href="categories.html#web">Web &gt; Reverse</a>
+            <a href="tags.html#web-reverse">#Web Reverse</a>
+          </footer>
+        </article>
+
+        <article class="post-card">
+          <a href="post-solar-response.html">
+            <h3>应急响应比赛复盘：日志与流量</h3>
+            <p>把比赛题里的日志排查、时间线梳理和流量定位流程拆成可复用的检查清单。</p>
+          </a>
+          <footer>
+            <span>2026-05-18</span>
+            <a href="categories.html#forensics">应急响应&取证</a>
+            <a href="tags.html#incident-response">#应急响应</a>
+          </footer>
+        </article>
+
+        <article class="post-card">
+          <a href="post-reverse-ctf.html">
+            <h3>Reverse 题目复盘：状态机与约束</h3>
+            <p>用伪代码、状态转移和约束验证的角度复盘一道逆向题的解题思路。</p>
+          </a>
+          <footer>
+            <span>2026-04-07</span>
+            <a href="categories.html#reverse">只关于 Reverse</a>
+            <a href="tags.html#ctf">#CTF</a>
+          </footer>
+        </article>
+
+        <article class="post-card">
+          <a href="post-font-obfuscation.html">
+            <h3>Web 题目笔记：从源码到行为</h3>
+            <p>记录一次从静态源码、网络请求、运行时状态逐步收敛问题边界的过程。</p>
+          </a>
+          <footer>
+            <span>2026-03-22</span>
+            <a href="categories.html#web">Web</a>
+            <a href="tags.html#web">#Web</a>
+          </footer>
+        </article>
+      </div>
+
+      <nav class="pagination" aria-label="分页">
+        <span class="current">1</span>
+        <a href="archives.html">2</a>
+        <a href="archives.html" aria-label="下一页">›</a>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by static HTML · Inspired by Hexo Fluid · <span data-runtime></span></p>
+    <p>总访问量 <span data-count="pv">1288</span> 次 · 总访客数 <span data-count="uv">326</span> 人</p>
+  </footer>
+
+  <button class="top-button" type="button" data-back-top aria-label="返回顶部">↑</button>
+
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">搜索</h2>
+        <button class="icon-button" type="button" data-close-search aria-label="关闭搜索">×</button>
+      </div>
+      <label class="search-box">
+        <span>关键词</span>
+        <input type="search" data-search-input autocomplete="off">
+      </label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+
+  <script src="assets/posts-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

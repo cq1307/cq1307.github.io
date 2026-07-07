@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>友链 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="links">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="主导航">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="archives.html">归档</a>
+        <a href="categories.html">分类</a>
+        <a href="tags.html">标签</a>
+        <a class="active" href="links.html">友链</a>
+        <a href="about.html">关于</a>
+        <button class="icon-button" type="button" data-open-search aria-label="搜索">⌕</button>
+        <button class="icon-button" type="button" data-theme-toggle aria-label="切换颜色模式">◐</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Friends</p>
+      <h1>友链</h1>
+      <p>把值得长期阅读的人放在这里。</p>
+    </section>
+  </header>
+
+  <main class="page-shell">
+    <section class="friend-grid">
+      <a class="friend-card" href="#">
+        <span class="avatar">A</span>
+        <strong>Alpha Notes</strong>
+        <small>Web 安全与工程笔记</small>
+      </a>
+      <a class="friend-card" href="#">
+        <span class="avatar">B</span>
+        <strong>Binary Room</strong>
+        <small>逆向、调试与工具链</small>
+      </a>
+      <a class="friend-card" href="#">
+        <span class="avatar">C</span>
+        <strong>Cloud Trace</strong>
+        <small>日志、云安全与取证</small>
+      </a>
+    </section>
+
+    <section class="exchange-box">
+      <h2>友链格式</h2>
+      <pre><code>title: CQ_ Lab
+intro: 记录 CTF、逆向和应急响应学习
+link: https://your-name.github.io/
+avatar: https://your-avatar.example/avatar.png</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>Powered by static HTML · <span data-runtime></span></p></footer>
+  <button class="top-button" type="button" data-back-top aria-label="返回顶部">↑</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head"><h2 id="search-title">搜索</h2><button class="icon-button" type="button" data-close-search aria-label="关闭搜索">×</button></div>
+      <label class="search-box"><span>关键词</span><input type="search" data-search-input autocomplete="off"></label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
