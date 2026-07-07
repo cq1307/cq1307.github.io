@@ -594,6 +594,12 @@ code {
   height: 92px;
   margin: 0 auto 12px;
   font-size: 1.6rem;
+  object-fit: cover;
+  border: 3px solid rgba(255, 209, 102, 0.88);
+  box-shadow:
+    0 0 0 4px rgba(255, 42, 95, 0.18),
+    0 0 28px rgba(255, 42, 95, 0.55),
+    0 0 42px rgba(35, 231, 255, 0.28);
 }
 
 .skill-list {
