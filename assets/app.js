@@ -140,7 +140,7 @@
         ? [...groups.entries()]
         : defaultCategories.map((name) => [name, []]);
       categoriesContainer.innerHTML = `
-        <section class="taxonomy-board" aria-label="鍒嗙被鐩綍">
+        <section class="taxonomy-board" aria-label="分类目录">
           ${renderTaxonomyGroups(categoryEntries, false)}
         </section>
       `;
@@ -165,7 +165,7 @@
   function renderTaxonomyGroups(entries, isTag) {
     return entries.map(([name, items]) => {
       const id = isTag ? slug(String(name).replace(/^#/, "")) : slug(name);
-      const title = isTag ? name : String(name).split(" > ").join(" 鈥?");
+      const title = isTag ? name : String(name).split(" > ").join(" / ");
       return `
         <section id="${id}" class="taxonomy-group">
           <header class="taxonomy-group-head">
@@ -258,9 +258,9 @@
 
     results.innerHTML = matched.length
       ? matched.map((post) => (
-        `<a href="${escapeHtml(post.url)}"><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(categoryText(post))} 路 ${escapeHtml(post.summary || "")}</span></a>`
+        `<a href="${escapeHtml(post.url)}"><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(categoryText(post))} - ${escapeHtml(post.summary || "")}</span></a>`
       )).join("")
-      : "<p>娌℃湁鎵惧埌鐩稿叧鏂囩珷銆?/p>";
+      : "<p>没有找到相关文章。</p>";
   }
 
   document.querySelectorAll("[data-open-search]").forEach((button) => {
