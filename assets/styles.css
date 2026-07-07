@@ -208,9 +208,24 @@ input {
     0 0 34px rgba(255, 138, 25, 0.35);
 }
 
+.hero-avatar {
+  display: block;
+  width: clamp(168px, 24vw, 260px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 209, 102, 0.92);
+  box-shadow:
+    0 0 0 8px rgba(255, 42, 95, 0.16),
+    0 0 42px rgba(255, 42, 95, 0.72),
+    0 0 74px rgba(35, 231, 255, 0.36),
+    inset 0 0 18px rgba(255, 255, 255, 0.18);
+}
+
 .subtitle {
   min-height: 38px;
-  margin: 26px auto 0;
+  margin: 30px auto 0;
   font-size: clamp(1.05rem, 2vw, 1.4rem);
   color: rgba(255, 248, 240, 0.9);
   text-shadow: 0 0 18px rgba(255, 138, 25, 0.35);
@@ -220,21 +235,6 @@ input {
   content: "_";
   color: var(--cyan);
   animation: blink 1s steps(2, start) infinite;
-}
-
-.scroll-cue {
-  position: absolute;
-  bottom: 24px;
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 209, 102, 0.7);
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1.8rem;
-  background: rgba(255, 42, 95, 0.14);
-  box-shadow: 0 0 26px rgba(255, 138, 25, 0.35), inset 0 0 20px rgba(35, 231, 255, 0.12);
 }
 
 .page-shell {
@@ -765,6 +765,10 @@ code {
 
   .hero h1 {
     font-size: clamp(3.2rem, 18vw, 5.2rem);
+  }
+
+  .hero-avatar {
+    width: clamp(148px, 42vw, 210px);
   }
 
   .article-layout {
