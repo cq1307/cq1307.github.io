@@ -153,10 +153,64 @@
     }).join("");
   }
 
+  function renderTaxonomyViews() {
+    const categoriesContainer = document.querySelector("[data-categories]");
+    if (categoriesContainer) {
+      const groups = new Map();
+      posts.forEach((post) => {
+        const name = categoryText(post);
+        if (!groups.has(name)) groups.set(name, []);
+        groups.get(name).push(post);
+      });
+      categoriesContainer.innerHTML = `
+        <section class="taxonomy-board" aria-label="分类目录">
+          ${renderTaxonomyGroups([...groups.entries()], false)}
+        </section>
+      `;
+    }
+
+    const tagsContainer = document.querySelector("[data-tags]");
+    if (tagsContainer) {
+      const groups = new Map();
+      posts.forEach((post) => {
+        tagsOf(post).forEach((tag) => {
+          if (!groups.has(tag)) groups.set(tag, []);
+          groups.get(tag).push(post);
+        });
+      });
+      tagsContainer.classList.add("taxonomy-board");
+      tagsContainer.innerHTML = renderTaxonomyGroups([...groups.entries()].map(([tag, items]) => [`#${tag}`, items]), true);
+    }
+  }
+
+  function renderTaxonomyGroups(entries, isTag) {
+    return entries.map(([name, items]) => {
+      const id = isTag ? slug(String(name).replace(/^#/, "")) : slug(name);
+      const title = isTag ? name : String(name).split(" > ").join(" › ");
+      return `
+        <section id="${id}" class="taxonomy-group">
+          <header class="taxonomy-group-head">
+            <h2>${escapeHtml(title)}</h2>
+            <span>${items.length}</span>
+          </header>
+          <div class="taxonomy-posts">
+            ${items.map((post) => `
+              <a href="${escapeHtml(post.url)}">
+                <span class="taxonomy-post-title">${escapeHtml(post.title)}</span>
+                <time>${escapeHtml(post.date || "")}</time>
+              </a>
+            `).join("")}
+          </div>
+        </section>
+      `;
+    }).join("");
+  }
+
   renderHomePosts();
   renderArchives();
   renderCategories();
   renderTags();
+  renderTaxonomyViews();
 
   const navToggle = document.querySelector(".nav-toggle");
   const navMenu = document.querySelector(".nav-menu");
