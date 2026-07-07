@@ -1,42 +1,8 @@
-(function () {
-  const fallbackPosts = [
-    {
-      title: "一次字体混淆页面的分析记录",
-      url: "post-font-obfuscation.html",
-      date: "2026-06-29",
-      categories: ["Web", "Reverse"],
-      tags: ["Web Reverse"],
-      summary: "从页面资源、字体映射和渲染结果入手，整理一次前端字体混淆的观察路径。"
-    },
-    {
-      title: "应急响应比赛复盘：日志与流量",
-      url: "post-solar-response.html",
-      date: "2026-05-18",
-      categories: ["应急响应&取证"],
-      tags: ["应急响应"],
-      summary: "把日志排查、时间线梳理和流量定位流程拆成可复用的检查清单。"
-    },
-    {
-      title: "Reverse 题目复盘：状态机与约束",
-      url: "post-reverse-ctf.html",
-      date: "2026-04-07",
-      categories: ["只关于 Reverse"],
-      tags: ["CTF", "Reverse"],
-      summary: "用伪代码、状态转移和约束验证的角度复盘一道逆向题的解题思路。"
-    },
-    {
-      title: "Web 题目笔记：从源码到行为",
-      url: "post-font-obfuscation.html",
-      date: "2026-03-22",
-      categories: ["Web"],
-      tags: ["Web"],
-      summary: "从静态源码、网络请求、运行时状态逐步收敛问题边界。"
-    }
-  ];
-
-  const posts = (Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : fallbackPosts)
+﻿(function () {
+  const posts = (Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [])
     .slice()
     .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  const defaultCategories = ["语言", "Android", "Windows", "CTF", "IoT", "Game", "Reverse_Wiki"];
 
   const root = document.documentElement;
   const savedTheme = localStorage.getItem("theme");
@@ -80,6 +46,10 @@
   function renderHomePosts() {
     const list = document.querySelector("[data-post-list]");
     if (!list) return;
+    if (!posts.length) {
+      list.innerHTML = `<p class="empty-state">暂无文章</p>`;
+      return;
+    }
     list.innerHTML = posts.map((post) => {
       const categories = categoryText(post);
       const tag = tagsOf(post)[0];
@@ -102,6 +72,10 @@
   function renderArchives() {
     const timeline = document.querySelector("[data-archives]");
     if (!timeline) return;
+    if (!posts.length) {
+      timeline.innerHTML = `<p class="empty-state">暂无归档</p>`;
+      return;
+    }
     const byYear = new Map();
     posts.forEach((post) => {
       const year = String(post.date || "未归档").slice(0, 4);
@@ -162,9 +136,12 @@
         if (!groups.has(name)) groups.set(name, []);
         groups.get(name).push(post);
       });
+      const categoryEntries = groups.size
+        ? [...groups.entries()]
+        : defaultCategories.map((name) => [name, []]);
       categoriesContainer.innerHTML = `
-        <section class="taxonomy-board" aria-label="分类目录">
-          ${renderTaxonomyGroups([...groups.entries()], false)}
+        <section class="taxonomy-board" aria-label="鍒嗙被鐩綍">
+          ${renderTaxonomyGroups(categoryEntries, false)}
         </section>
       `;
     }
@@ -179,14 +156,16 @@
         });
       });
       tagsContainer.classList.add("taxonomy-board");
-      tagsContainer.innerHTML = renderTaxonomyGroups([...groups.entries()].map(([tag, items]) => [`#${tag}`, items]), true);
+      tagsContainer.innerHTML = groups.size
+        ? renderTaxonomyGroups([...groups.entries()].map(([tag, items]) => [`#${tag}`, items]), true)
+        : '<p class="empty-state">暂无标签</p>';
     }
   }
 
   function renderTaxonomyGroups(entries, isTag) {
     return entries.map(([name, items]) => {
       const id = isTag ? slug(String(name).replace(/^#/, "")) : slug(name);
-      const title = isTag ? name : String(name).split(" > ").join(" › ");
+      const title = isTag ? name : String(name).split(" > ").join(" 鈥?");
       return `
         <section id="${id}" class="taxonomy-group">
           <header class="taxonomy-group-head">
@@ -279,9 +258,9 @@
 
     results.innerHTML = matched.length
       ? matched.map((post) => (
-        `<a href="${escapeHtml(post.url)}"><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(categoryText(post))} · ${escapeHtml(post.summary || "")}</span></a>`
+        `<a href="${escapeHtml(post.url)}"><strong>${escapeHtml(post.title)}</strong><span>${escapeHtml(categoryText(post))} 路 ${escapeHtml(post.summary || "")}</span></a>`
       )).join("")
-      : "<p>没有找到相关文章。</p>";
+      : "<p>娌℃湁鎵惧埌鐩稿叧鏂囩珷銆?/p>";
   }
 
   document.querySelectorAll("[data-open-search]").forEach((button) => {
@@ -315,3 +294,5 @@
     )).join("");
   }
 })();
+
+

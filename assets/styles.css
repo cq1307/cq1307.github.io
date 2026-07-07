@@ -579,6 +579,18 @@ body[data-page="home"] .post-card footer {
   color: var(--amber);
 }
 
+.empty-state {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 42px 0;
+  color: rgba(232, 230, 235, 0.64);
+  font-family: var(--font-cjk-display);
+  font-weight: 800;
+  text-align: center;
+  text-shadow: 0 0 18px rgba(255, 42, 95, 0.12);
+}
+
 body[data-page="home"] .post-card footer a {
   color: rgba(255, 216, 110, 0.72);
 }
