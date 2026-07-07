@@ -2325,3 +2325,15 @@ body[data-page="home"] .post-card footer {
   color: #0a8fba;
   border-left-color: #c8a755;
 }
+
+/* Exact background image pass: use the supplied image without color overlays. */
+body::before {
+  background: url("site-bg-original.png") center / cover no-repeat;
+  background-attachment: fixed;
+}
+
+body::after,
+body[data-page="home"] .hero-mask,
+.hero-mask {
+  background: transparent;
+}

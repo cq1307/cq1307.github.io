@@ -304,7 +304,7 @@ function New-ArticleHtml($Title, $Date, $Categories, $Summary, $BodyHtml) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10201f">
   <title>$safeTitle - CQ_ Lab</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260707-snow-white">
+  <link rel="stylesheet" href="assets/styles.css?v=20260707-exact-bg">
 </head>
 <body data-page="post">
   <div class="progress" id="progress"></div>
