@@ -1635,3 +1635,308 @@ body[data-page="links"] .exchange-box pre {
     grid-template-columns: 1fr;
   }
 }
+
+/* Fixed background + glass content layers, applied across all pages. */
+html {
+  background: #080914;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: transparent;
+  color: rgba(246, 248, 255, 0.92);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(9, 12, 28, 0.42)),
+    url("site-bg.png") center / cover no-repeat,
+    url("hero-anime-glitch.png") center / cover no-repeat;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 22% 8%, rgba(255, 255, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(185, 124, 255, 0.16), transparent 30%),
+    linear-gradient(90deg, rgba(5, 8, 24, 0.22), rgba(255, 255, 255, 0.04), rgba(5, 8, 24, 0.18));
+}
+
+.site-header,
+.site-header.compact,
+body[data-page="home"] .page-shell {
+  background: transparent;
+}
+
+.site-header.compact {
+  min-height: 360px;
+}
+
+.hero-bg {
+  display: none;
+}
+
+.hero-mask {
+  background:
+    linear-gradient(180deg, rgba(7, 10, 24, 0.12), rgba(7, 10, 24, 0.38) 58%, rgba(7, 10, 24, 0.58)),
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.08), transparent 36%);
+}
+
+.navbar {
+  background: rgba(20, 24, 42, 0.38);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 28px rgba(10, 13, 30, 0.16);
+  backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.nav-menu a:hover,
+.nav-menu a.active,
+.icon-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18), 0 0 22px rgba(178, 121, 255, 0.18);
+}
+
+.progress {
+  background: linear-gradient(90deg, #9a7bff, #ffe28a, #7fe7ff);
+  box-shadow: 0 0 18px rgba(154, 123, 255, 0.42);
+}
+
+.hero-content,
+.post-hero {
+  filter: drop-shadow(0 18px 36px rgba(8, 12, 28, 0.32));
+}
+
+.eyebrow {
+  color: #ffe28a;
+}
+
+.hero h1,
+.post-hero h1,
+.hero-name,
+.brand {
+  text-shadow:
+    2px 0 0 rgba(132, 98, 255, 0.55),
+    -2px 0 0 rgba(120, 232, 255, 0.42),
+    0 12px 34px rgba(8, 12, 28, 0.3);
+}
+
+.subtitle,
+.post-hero p:last-child {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-avatar {
+  border-color: rgba(255, 226, 138, 0.9);
+  box-shadow:
+    0 0 0 8px rgba(255, 255, 255, 0.18),
+    0 0 42px rgba(154, 123, 255, 0.42),
+    0 0 74px rgba(127, 231, 255, 0.28);
+}
+
+.content-band,
+.taxonomy-board,
+.timeline,
+body[data-page="about"] .about-layout,
+body[data-page="links"] .page-shell,
+.article-body,
+.toc {
+  border: 0;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(18, 25, 42, 0.68), rgba(8, 12, 26, 0.76)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(7, 10, 24, 0.32);
+  backdrop-filter: blur(24px) saturate(1.12);
+  -webkit-backdrop-filter: blur(24px) saturate(1.12);
+}
+
+body[data-page="home"] .content-band,
+.taxonomy-board {
+  padding: clamp(34px, 5vw, 64px) clamp(28px, 6vw, 76px);
+}
+
+body[data-page="home"] .content-band {
+  background:
+    linear-gradient(135deg, rgba(18, 25, 42, 0.68), rgba(8, 12, 26, 0.76)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(7, 10, 24, 0.32);
+  backdrop-filter: blur(24px) saturate(1.12);
+  -webkit-backdrop-filter: blur(24px) saturate(1.12);
+}
+
+body[data-page="categories"] .page-shell,
+body[data-page="tags"] .page-shell,
+body[data-page="archives"] .page-shell,
+body[data-page="links"] .page-shell {
+  width: min(980px, calc(100% - 36px));
+}
+
+.taxonomy-board,
+.timeline {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.timeline {
+  padding: clamp(34px, 5vw, 64px) clamp(28px, 6vw, 76px);
+  border-left: 0;
+}
+
+body[data-page="about"] .about-layout,
+body[data-page="links"] .page-shell {
+  padding: clamp(34px, 5vw, 64px) clamp(28px, 6vw, 76px);
+}
+
+.simple-card,
+.exchange-box,
+.profile,
+.friend-card,
+.post-card {
+  background: transparent;
+  box-shadow: none;
+}
+
+.simple-card::before,
+.exchange-box::before,
+.profile::before,
+.article-body::before,
+.friend-card::before,
+.post-card::before {
+  content: none;
+}
+
+body[data-page="home"] .post-card::after,
+.timeline a::before,
+.taxonomy-group-head::before,
+.taxonomy-posts a::before {
+  background: repeating-linear-gradient(90deg, rgba(255, 226, 138, 0.28) 0 2px, transparent 2px 8px);
+}
+
+.article-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+  gap: 28px;
+  width: min(1180px, calc(100% - 36px));
+  margin: -42px auto 90px;
+}
+
+.article-body {
+  padding: clamp(28px, 5vw, 62px);
+  overflow: visible;
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: none;
+}
+
+.article-body h1,
+.article-body h2 {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(205, 218, 255, 0.18);
+}
+
+.article-body p,
+.article-body li,
+.toc a {
+  color: rgba(235, 240, 255, 0.72);
+}
+
+.article-body img {
+  border: 0;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 46px rgba(8, 12, 28, 0.22);
+}
+
+.article-body blockquote,
+.notice {
+  border-left-color: #8f7cff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.article-body th,
+.article-body td {
+  border-color: rgba(205, 218, 255, 0.16);
+}
+
+pre {
+  background: rgba(8, 10, 22, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.toc {
+  top: 88px;
+  padding: 18px 20px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.toc p {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.toc a {
+  padding: 5px 0 5px 10px;
+  border-left: 2px solid transparent;
+}
+
+.toc a:hover {
+  color: #ffe28a;
+  border-left-color: #8f7cff;
+}
+
+.search-panel {
+  background: rgba(10, 14, 28, 0.86);
+  border-color: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(22px);
+}
+
+@media (max-width: 860px) {
+  .nav-menu {
+    background: rgba(14, 18, 34, 0.88);
+    backdrop-filter: blur(20px);
+  }
+
+  .article-layout {
+    width: calc(100% - 24px);
+    max-width: none;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .article-body {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .article-body img,
+  pre {
+    max-width: 100%;
+  }
+
+  .toc {
+    display: none;
+  }
+
+  body[data-page="home"] .content-band,
+  .taxonomy-board,
+  .timeline,
+  body[data-page="about"] .about-layout,
+  body[data-page="links"] .page-shell,
+  .article-body {
+    padding: 26px 20px;
+  }
+}
