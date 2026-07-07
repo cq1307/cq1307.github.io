@@ -540,18 +540,6 @@ code {
   color: var(--muted);
 }
 
-.site-footer {
-  padding: 34px 18px;
-  text-align: center;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-  background: var(--surface-solid);
-}
-
-.site-footer p {
-  margin: 6px 0;
-}
-
 .top-button {
   position: fixed;
   right: 22px;

@@ -252,22 +252,6 @@
     }
   });
 
-  const runtime = document.querySelectorAll("[data-runtime]");
-  if (runtime.length) {
-    const start = new Date("2026-07-07T00:00:00+08:00").getTime();
-    function tickRuntime() {
-      const diff = Math.max(0, Date.now() - start);
-      const days = Math.floor(diff / 86400000);
-      const hours = Math.floor(diff / 3600000) % 24;
-      const minutes = Math.floor(diff / 60000) % 60;
-      runtime.forEach((el) => {
-        el.textContent = `已运行 ${days} 天 ${hours} 小时 ${minutes} 分钟`;
-      });
-    }
-    tickRuntime();
-    window.setInterval(tickRuntime, 60000);
-  }
-
   const toc = document.querySelector("[data-toc]");
   const article = document.querySelector("[data-article]");
   if (toc && article) {

@@ -317,10 +317,6 @@ $BodyHtml
     </aside>
   </main>
 
-  <footer class="site-footer">
-    <p>Powered by static HTML &middot; Inspired by Hexo Fluid &middot; <span data-runtime></span></p>
-  </footer>
-
   <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
 $(Get-SearchModalHtml)
   <script src="assets/posts-data.js"></script>
