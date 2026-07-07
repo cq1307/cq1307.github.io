@@ -1940,3 +1940,145 @@ pre {
     padding: 26px 20px;
   }
 }
+
+/* Final fixed-wallpaper scroll model. Keep this last so every page follows it. */
+body::before {
+  background-attachment: fixed;
+}
+
+body[data-page="home"] .site-header,
+body[data-page="home"] .hero {
+  min-height: 100svh;
+}
+
+body[data-page="home"] .hero {
+  padding: clamp(86px, 12vh, 132px) 24px clamp(78px, 11vh, 118px);
+}
+
+body[data-page="home"] .hero-mask {
+  background:
+    linear-gradient(180deg, rgba(7, 10, 24, 0.08), rgba(7, 10, 24, 0.14) 50%, rgba(7, 10, 24, 0.22)),
+    radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.12), transparent 38%);
+}
+
+body[data-page="home"] .page-shell {
+  min-height: 100svh;
+  width: 100%;
+  padding: clamp(78px, 10vh, 118px) 0 clamp(82px, 12vh, 130px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: transparent;
+}
+
+body[data-page="home"] .content-band {
+  width: min(1060px, calc(100% - 64px));
+  min-height: min(760px, calc(100svh - 150px));
+  margin: 0 auto;
+  padding: clamp(46px, 6vw, 78px) clamp(34px, 6vw, 86px);
+  border: 0;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(35, 43, 62, 0.62), rgba(8, 12, 26, 0.72)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 34px 110px rgba(5, 8, 22, 0.38);
+  backdrop-filter: blur(28px) saturate(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(1.08);
+}
+
+body[data-page="home"] .content-band::before,
+body[data-page="home"] .post-card::before,
+body[data-page="home"] .post-card::after {
+  content: none;
+}
+
+body[data-page="home"] .section-heading {
+  display: block;
+  margin: 0 0 clamp(30px, 5vw, 58px);
+}
+
+body[data-page="home"] .section-heading::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 22px;
+  background: linear-gradient(90deg, rgba(255, 226, 138, 0.26), rgba(154, 123, 255, 0.18), transparent);
+}
+
+body[data-page="home"] .section-heading h2 {
+  margin-top: 12px;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+}
+
+body[data-page="home"] .post-list {
+  gap: 0;
+}
+
+body[data-page="home"] .post-card {
+  min-height: 0;
+  padding: clamp(28px, 5vw, 52px) 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-page="home"] .post-card + .post-card {
+  border-top: 1px solid rgba(225, 235, 255, 0.13);
+}
+
+body[data-page="home"] .post-card h3 {
+  font-size: clamp(1.45rem, 2.7vw, 2.15rem);
+  color: rgba(246, 248, 255, 0.86);
+}
+
+body[data-page="home"] .post-card p {
+  max-width: 780px;
+  color: rgba(235, 240, 255, 0.68);
+}
+
+body[data-page="home"] .post-meta {
+  color: rgba(235, 240, 255, 0.66);
+}
+
+body[data-page="home"] .post-card:hover {
+  transform: translateX(8px);
+}
+
+.content-band,
+.taxonomy-board,
+.timeline,
+body[data-page="about"] .about-layout,
+body[data-page="links"] .page-shell,
+.article-body,
+.toc {
+  background:
+    linear-gradient(135deg, rgba(35, 43, 62, 0.62), rgba(8, 12, 26, 0.72)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow: 0 34px 110px rgba(5, 8, 22, 0.38);
+}
+
+@media (max-width: 860px) {
+  body[data-page="home"] .hero {
+    padding: 92px 18px 78px;
+  }
+
+  body[data-page="home"] .page-shell {
+    padding: 54px 0 76px;
+  }
+
+  body[data-page="home"] .content-band {
+    width: calc(100% - 24px);
+    min-height: calc(100svh - 108px);
+    padding: 30px 22px;
+  }
+
+  body[data-page="home"] .post-card {
+    padding: 30px 0;
+  }
+
+  body[data-page="home"] .post-card:hover {
+    transform: none;
+  }
+}
