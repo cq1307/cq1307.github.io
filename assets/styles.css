@@ -2328,7 +2328,7 @@ body[data-page="home"] .post-card footer {
 
 /* Exact background image pass: use the supplied image without color overlays. */
 body::before {
-  background: url("site-bg-original.png") center / cover no-repeat;
+  background: url("site-bg-restored-4k.jpg") center / cover no-repeat;
   background-attachment: fixed;
 }
 
