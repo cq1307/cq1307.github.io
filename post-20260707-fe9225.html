@@ -1,0 +1,770 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>C语言重点 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260707-natural-directory">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">语言</p>
+      <h1>C语言重点</h1>
+      <p>2026-07-07 &middot; C 语言函数、参数、返回值与基础语法重点整理。</p>
+    </section>
+  </header>
+
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<h1 id="函数">函数</h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1768374546049-507ad463-f115-4add-a30a-04280f85f1a7.png" alt=""></p>
+<p>这是一段求和的代码 那么我的程序中需要用很多次这个求和过程，就需要每次都写一遍</p>
+<p>所以用函数我们就可以简化这个过程，将我们的过程封装成函数，每次调用只要写函数名即可</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772123515235-c515e4ba-a76f-4961-8d28-bb0192d73163.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1768374687440-01baac19-2c65-4d4c-a24f-2405773ea488.png" alt=""></p>
+<p>对内隐藏细节 对外暴露接口</p>
+<p>函数的基本声明结构</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178322835-ae71bfe4-8440-4ac0-ae38-6982df4d6921.png" alt=""></p>
+<p>拓展一下几类函数 对应的不同就是 参数 和 返回值</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178375721-cc52cbfd-94ef-4da5-a45d-7f7358f3d386.png" alt=""></p>
+<h3 id="先总结-无返回值用void-有返回值用int">先总结 无返回值用void 有返回值用int</h3>
+<h3 id="1-无返回值-无参数">1.无返回值 无参数</h3>
+<pre><code class="language-plain">
+//无返回值 无参数
+#include &lt;stdio.h&gt;
+void fun(){
+	int sum = 0;
+	for(int i=0;i&lt;=100;i++){
+		
+		sum += i;//leijia
+			
+	}
+	printf(&quot;sum=%d\n&quot;,sum);
+}
+
+int main()
+ {
+fun();
+
+return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178574047-06ec3353-c290-4df8-85ac-907b0a3fea9d.png" alt=""></p>
+<h3 id="2-有返回值-无参数">2.有返回值 无参数</h3>
+<p>注意  ：返回值返回到哪里？ 哪里调用就返回到哪里</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int fun()
+{ int sum = 0;
+for(int i = 0; i&lt;=100; i++)
+{
+sum += i;	
+}
+return sum;	
+}
+
+int main() 
+{
+	int s = fun();
+	printf(&quot;s=%d\n&quot;,s);
+	return 0;
+}
+
+</code></pre>
+<h3 id="3-需要参数-无返回值">3.需要参数 无返回值</h3>
+<pre><code class="language-c">
+//有参数 无返回值
+#include &lt;stdio.h&gt;
+void fun(int n)
+{
+    int sum ;
+    for(int i = 0; i&lt;=n ; i++ )
+    {
+        sum += i;
+
+    }
+    printf(&quot;sum = %d\n&quot;,sum);
+}
+
+int main()
+{
+   fun(100);
+return 0;
+}
+</code></pre>
+<h3 id="4-有返回值有参数">4.有返回值有参数</h3>
+<pre><code class="language-c">
+//有参数 有返回值、
+#include &lt;stdio.h&gt;
+int fun(int n)
+{
+    int sum = 0;
+    for(int i = 0;i &lt;= n; i++ )
+    {
+       sum += i;
+    }
+return sum ;
+}
+
+int main () 
+{
+    int s = 0;
+    s = fun(100) ;
+    return 0;
+}
+</code></pre>
+<h1 id="字符串">字符串</h1>
+<p>通常是用数组表示字符串</p>
+<p>将字符串直接声明给数组</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772296952930-08c43d40-4350-4c33-bc53-02a2a8b8f3a4.png" alt=""></p>
+<p>注意：数组不能被赋值</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772297092360-b8b193c1-6d67-44b2-be3f-1dc529979068.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772297231421-a77a984c-3ad9-471e-8605-c3945e8abfff.png" alt=""></p>
+<p>那么如何正确赋值呢 要引入新的C语言头文件库 &lt;string.h&gt;</p>
+<h2 id="string-h-strcpy">&lt;string.h&gt;（strcpy）</h2>
+<p>这个文件库中有一个函数可以对字符型数组赋值</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int main () 
+{  char str1[11];
+   strcpy(str1,&quot;helloworld&quot;);
+   printf(&quot;str1 =%s&quot;,str1);
+   return 0;
+}
+</code></pre>
+<h1 id="内存">内存</h1>
+<h2 id="冯诺依曼体系的计算机基本结构">冯诺依曼体系的计算机基本结构</h2>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298720613-fad883a1-6809-4862-992c-26e9a38c9b2e.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298097206-8c200aeb-35e2-42c3-bee2-0900342b263c.png" alt=""></p>
+<p>存储器严格意义上可分为两部分</p>
+<p>拆分开也可得到我们所认识的外设、主机</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298726147-c4977781-9c99-4db9-9f52-de322d4a78ae.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298244799-176312d6-5af1-412e-a8f6-615296442830.png" alt=""></p>
+<p>注：主存储器就是常说的内存条&#183;  辅助存储器就是硬盘</p>
+<p>扩展一下硬盘与内存条的区别 :</p>
+<p>硬盘就是用来存储数据的，例如电脑上存的各种word文档等各种文件</p>
+<p>而我们打开word码码字 点开播放器播放音频视频 这种ing的东西都是跑在内存上的</p>
+<h2 id="虚拟内存地址">虚拟内存地址</h2>
+<p>而内存条 显卡 各种适配卡都有自己的储存地址空间</p>
+<p>而我们的操作系统就将这些设备的储存地址空间抽象为巨大的一维数组 对于内存中的每一个字节都会分配编号 （编号）即为内存地址。</p>
+<p>例如：某硬件有4G的自带内存，<img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299091103-6e5f31c3-6a45-42b1-a2ac-614235f73b39.png" alt=""></p>
+<p>其中&#183;4294967296个字节都会被安排一个32位or64位的编号。</p>
+<p>而我们的个人电脑中 通常都是看到由十六进制表示的</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299318571-7bed187c-eb85-49db-b1d5-36eb32d8a9a7.png" alt=""></p>
+<p>如果不太理解可以结合AI理解</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299520269-039456cc-9975-4770-ad8f-4963b7df0287.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299546462-b2a5c086-c612-4ac6-baf9-1229383c0e2b.png" alt=""></p>
+<p>然后我们用简单的一个代码演示一下 （为了方便 将内存地址用十进制表示）</p>
+<pre><code class="language-plain">
+int main() 
+{ int a = 5;
+  int b = 10;
+retrun 1;
+}
+</code></pre>
+<p>内存中就是如图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299756984-4c59a2d4-62ab-42ae-9e02-553143592569.png" alt=""></p>
+<p>question：为什么101过了就是105？ 因为int类型在内存中占4个字节</p>
+<h1 id="数组">数组</h1>
+<p>1.相同数据类型的集合   2.数组的长度定义后不得改变</p>
+<p>3.数组中的每一个元素可以用下标表示位置.........</p>
+<p>举例：</p>
+<pre><code class="language-plain">
+int main()
+{
+    int a[] = {16,47,89,42,38};
+		for (int i = 0;i &lt; 5;i++)
+		{
+		     printf(&quot;%d\n&quot;,a[i]);   //遍历数组
+		}
+		return 0;
+}
+</code></pre>
+<p>内存图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772300235263-d9442848-4f00-4684-8d16-bf5098069455.png" alt=""></p>
+<h2 id="取地址">取地址（&amp;）</h2>
+<p>之前的学习中我们学过一个函数scanf（）而函数中有个&amp;的符号就是取地址符。</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int main() 
+{ int a = 5;
+  int b = 10; 
+printf(&quot;%p\n&quot;,&amp;a);
+printf(&quot;%p\n&quot;,&amp;b);
+return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772300791626-239d10ad-94f0-47c4-91a9-4fca88b25f14.png" alt=""></p>
+<p>如果你直接取一个数组的地址 eg：</p>
+<pre><code class="language-plain">
+int a[] = (16,47,89,42,38);
+printf(&quot;%p\n&quot;,&amp;a);
+printf(&quot;%p\n,&amp;a[0]&quot;;)
+</code></pre>
+<p>给你的都是数组的首地址（第0个元素的地址）</p>
+<h3 id="函数sizeof">函数sizeof（）</h3>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int main() 
+{ int a = 5;
+printf(&quot;%zu\n&quot;,sizeof(a));
+printf(&quot;%zu\n&quot;,sizeof(int));
+printf(&quot;%zu\n&quot;,sizeof(3.14));
+return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772301349728-61a1189a-f00a-4273-aa29-220b721beedf.png" alt=""></p>
+<p>所以sizeof就是返回参数在内存中所占用的字节数</p>
+<p>而当我们遍历一个数组却不知道数组的真正长度...............</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int main() 
+{int a[] ={16,47,89,42,38};
+for(int i = 0;sizeof(a)/sizeof(a[0];i++)
+   {
+    printf(&quot;%d\n&quot;,a[i]);
+   }
+   printf(&quot;%zu\n&quot;,sizeof(a));
+   printf(&quot;%zu\n&quot;,sizeof(a[0]));
+return 0;
+}
+</code></pre>
+<h1 id="指针-存放内存地址的变量">指针 (存放内存地址的变量)</h1>
+<p>（相当于也是一种变量 但是其中存放的是地址）</p>
+<h2 id="指针的声明">指针的声明</h2>
+<pre><code class="language-plain">
+int a ; //生命一个整形变量
+int *p;  //声明一个指针变量，该指针指向一个int类型值的内存地址(可以把指向理解为存储)
+</code></pre>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int main() 
+{
+int a ;
+int *p ;
+a = 5;
+p = &amp;a;
+return 0;
+}
+</code></pre>
+<p>内存中的排布</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772303027559-e1ef3c06-06e9-46d7-b2c2-691093ccf918.png" alt=""></p>
+<p>我们来验证一下</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+int main() 
+{
+int a = 5;
+int *p ;
+p = &amp;a;
+printf(&quot;a的地址为%p,a的值为%d\n&quot;,&amp;a,a);
+printf(&quot;p的地址为%p,p的值为%p\n&quot;,&amp;p,p)
+return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304126681-9953a9fe-1870-4635-a968-b259c7b11fc0.png" alt=""></p>
+<p>知道这个我们可以做的事情就很多了</p>
+<h2 id="间接引用操作符-解引用指针-非声明变量条件下">间接引用操作符*（解引用指针）非声明变量条件下</h2>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 5;
+    int *p;
+    p = &amp;a;
+    printf(&quot;%d\n&quot;,*p);
+    *p = 100;
+    printf(&quot;%d\n&quot;,a);
+    return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304705883-653e6c00-a08b-4294-8bd6-7244b49d4172.png" alt=""></p>
+<p>主要理解第三行代码（这也是为什么叫做指针的原因）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304801342-72ac14aa-1b36-4066-b08e-13844c2b5e46.png" alt=""></p>
+<h2 id="形参-实参">形参、实参</h2>
+<p>我们之前学过了函数 可以通过函数来实现两个值的互换</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+void swap(int a, int b )
+{
+    int temp;
+    temp = a;
+    a = b;
+   b = temp;
+   printf(&quot;a=%d , b=%d\n&quot;,a,b);
+}
+
+int main () 
+{
+    int m = 5;
+    int n = 10;
+    swap(m , n);
+    printf(&quot;m=%d,n=%d\n&quot;,m,n);
+}
+</code></pre>
+<p>这里就有两个输出  第一个是swap函数中的输出 第二个是main函数中的输出。</p>
+<p>第一行输出的是a= 10  b= 5</p>
+<p>而关键在于第二行的输出m和n的值有没有交换？答案是没有交换的。</p>
+<p>AI的回答：</p>
+<ol>
+<li>核心原因：值传递（pass by value）</li>
+</ol>
+<ul>
+<li>当你调用 <code>swap(m, n)</code> 时，C 语言会把 <code>m</code> 和 <code>n</code> 的<strong>值</strong>（5 和 10）复制一份，传给 <code>swap</code> 函数的形参 <code>a</code> 和 <code>b</code>。</li>
+<li><code>swap</code> 函数里交换的是这两个<strong>副本</strong><code>a</code> 和 <code>b</code>，和原来的 <code>m</code>、<code>n</code> 没有任何关系。</li>
+<li>所以 <code>swap</code> 里的 <code>a</code> 和 <code>b</code> 确实交换了，但 <code>main</code> 里的 <code>m</code> 和 <code>n</code> 还是原来的值。</li>
+</ul>
+<p>---</p>
+<ol>
+<li>代码执行过程</li>
+</ol>
+<ol>
+<li><code>main</code> 中：<code>m = 5</code>, <code>n = 10</code></li>
+<li>调用 <code>swap(m, n)</code>：</li>
+</ol>
+<ul>
+<li>生成副本：<code>a = 5</code>, <code>b = 10</code></li>
+<li>交换 <code>a</code> 和 <code>b</code>：<code>a = 10</code>, <code>b = 5</code></li>
+<li>打印：<code>a=10, b=5</code></li>
+</ul>
+<ol>
+<li>回到 <code>main</code>：</li>
+</ol>
+<ul>
+<li><code>m</code> 和 <code>n</code> 还是原来的 5 和 10</li>
+<li>打印：<code>m=5, n=10</code></li>
+</ul>
+<p>所以这里只是将mn的值作为副本传入函数，而如何将 m n的值真正实现互换呢？ 需要用到指针</p>
+<p>上面我们可以明白真正的值都是通过地址标注好的，所以我们可以通过指针来调换他们的实参。</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+void swap(int *a, int *b )
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+   printf(&quot;a=%d , b=%d\n&quot;,*a,*b);
+}
+
+int main () 
+{
+    int m  = 5 ;
+    int n  = 10;
+    swap(&amp;m , &amp;n );
+    printf(&quot;m =%d ,n = %d\n &quot;, m,n );
+
+return 0;
+}
+</code></pre>
+<p>这样输出出来改变的就是实参。</p>
+<p>自己对比一下吧 有什么疑问问ai或者博主本人。</p>
+<p>//只改变形参</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>void swap(int a, int b )</p>
+<p>{</p>
+<p>int temp;</p>
+<p>temp = a;</p>
+<p>a = b;</p>
+<p>b = temp;</p>
+<p>printf(&quot;a=%d , b=%d\n&quot;,a,b);</p>
+<p>}</p>
+<p>int main ()</p>
+<p>{</p>
+<p>int m = 5;</p>
+<p>int n = 10;</p>
+<p>swap(m , n);</p>
+<p>printf(&quot;m=%d,n=%d\n&quot;,m,n);</p>
+<p>}</p>
+<p>//改变实参</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>void swap(int <em>a, int </em>b )</p>
+<p>{</p>
+<p>int temp;</p>
+<p>temp = *a;</p>
+<p><em>a = </em>b;</p>
+<p>*b = temp;</p>
+<p>printf(&quot;a=%d , b=%d\n&quot;,<em>a,</em>b);</p>
+<p>}</p>
+<p>int main ()</p>
+<p>{</p>
+<p>int m  = 5 ;</p>
+<p>int n  = 10;</p>
+<p>swap(&amp;m , &amp;n );</p>
+<p>printf(&quot;m =%d ,n = %d\n &quot;, m,n );</p>
+<p>return 0;</p>
+<p>}</p>
+<h1 id="指针与数组">指针与数组</h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772626494018-2c922631-ef0a-4f25-8a25-99e67aed18d9.png" alt=""></p>
+<pre><code class="language-c">
+#include &lt;stdio.h&gt;
+int main(int argc, char const *argv[])
+{
+    int a[] = {15,22,76,43,87};//声明数组
+    int *p; //声明指针
+    p = a; //将数组首地址给指针
+
+    printf(&quot;%p\n&quot;,a);
+    printf(&quot;%p\n&quot;,p);
+    printf(&quot;%d\n&quot;,*p);
+    return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772627088159-5991e6ab-a7f1-430f-b0e3-08dd739f198d.png" alt=""></p>
+<h2 id="用指针遍历数组-其实也可以用p-i">用指针遍历数组（其实也可以用p[i]）</h2>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[] = {15,22,76,43,87}; // 声明数组
+    int *p;
+    p = a;
+
+    // 1. 下标法遍历
+    for (int i = 0; i &lt; sizeof(a) / sizeof(a[0]); i++)
+    {
+        printf(&quot;%d\n&quot;, a[i]);
+    }
+
+    // 2. 指针法遍历
+    for (int i = 0; i &lt; sizeof(a) / sizeof(a[0]); i++)
+    {
+        printf(&quot;%d\n&quot;, *(p + i));
+    }
+
+    return 0;
+}
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772628473319-5ee1c582-4607-4780-84e7-cd1312f677ab.png" alt=""></p>
+<p>question： 为什么是p+i?那岂不是是一个一个的加 ，但是我们的int类型地址是4个为一组的。</p>
+<h2 id="指针的算数运算">指针的算数运算</h2>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772628834896-996ef3a4-1dbd-466c-82dd-278626d55072.png" alt=""></p>
+<p>所以当声明了指针的数据类型 例如</p>
+<pre><code class="language-plain">
+int *p(可以自己给p一个值run一下)
+printf(&quot;%p\n&quot;,p);
+p++;
+printf(&quot;%p\n&quot;,p);
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772629154665-d3ecac52-c27c-4b82-afa2-315ed2f1386c.png" alt=""></p>
+<p>这个东西也可以说是“步长”这个概念</p>
+<h2 id="各个数据类型的字节数">各个数据类型的字节数</h2>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772629381173-eba86f77-cf8f-4d47-96ad-8589afda06e8.png" alt=""></p>
+<h1 id="结构体">结构体</h1>
+<p>本质上讲，结构体也是一种数据类型</p>
+<p>结构体的本质是各种变量的集合</p>
+<h2 id="声明">声明</h2>
+<p>用坐标轴表示一个点</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+ struct point //创建一个名为point的结构体
+ {
+    int x;
+    int y;
+ };
+</code></pre>
+<p>现在就已经有一个叫做point的数据类型</p>
+<h2 id="结构体的初始化-调用">结构体的初始化、调用</h2>
+<pre><code class="language-plain">
+// 1. 先定义结构体类型
+struct point {
+    int x;
+    int y;
+};
+
+// 2. 声明结构体变量
+struct point p;  // struct + 结构体名 + 变量名
+
+// 3. 给变量赋值
+p.x = 10;
+p.y = 15;
+</code></pre>
+<ul>
+<li><code>struct point</code>：整体是一个<strong>类型</strong>，就像<code>int</code>一样。</li>
+<li><code>p</code>：是这个类型的一个<strong>变量</strong>，就像<code>int a;</code>里的<code>a</code>一样。</li>
+<li>访问成员时用 <code>.</code>：<code>p.x</code> 表示变量<code>p</code>里的<code>x</code>成员，<code>p.y</code> 表示变量<code>p</code>里的<code>y</code>成员。</li>
+</ul>
+<p>---</p>
+<h2 id="实例">实例</h2>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772674384006-168d29e0-7d15-45db-aea8-8b7ee5df473f.png" alt=""></p>
+<p>先分析 需要编写函数 函数有参数有返回值 还需要一个结构体来接住函数的参数x、y 最后返回的是结构体。</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+
+// 1. 先定义结构体类型
+struct point {
+    int x;
+    int y;
+};
+
+struct point C_Point( int x ,int y) //创建point类型的函数C_Point
+{
+struct point temp;//在函数内创建结构体变量接住参数并返回
+temp.x = x;
+temp.y = y;
+return temp;
+}
+
+int main () 
+{
+    struct point p ;//函数返回的结构体 我们就需要创建新的结构体变量来接住
+    p = C_Point(5,10);
+    printf(&quot;%d\n&quot;,p.x);
+    printf(&quot;%d\n&quot;,p.y);
+
+    return 0;
+}
+</code></pre>
+<p>这个程序是有点脱裤子放屁的，在main中已经创建了一个结构体p了 何必要在函数中再搞个&#183;temp</p>
+<p>而真实的用法中，我们不会通过结构体来传递 而是直接通过结构体的地址来进行值传递</p>
+<h1 id="结构体与指针">结构体与指针</h1>
+<p>声明</p>
+<pre><code class="language-plain">
+struct point *pp；
+//写法一
+(*pp).x = 10;
+(*pp).y = 5;
+\\写法二
+pp-&gt;x = 10;
+pp-&gt;y = 5;
+</code></pre>
+<pre><code class="language-plain">
+#include  &lt;stdio.h&gt;
+struct point
+{
+    int x;
+    int y;
+};
+
+int main()
+{
+    struct point p;
+    p.x = 5 ;
+    p.y = 10;
+
+    struct point *pp;
+    pp = &amp;p;
+
+    pp-&gt;x =10;
+    pp-&gt;y = 5;
+}
+//在打印后两个xy都是10 5 通过指针用内存直接改掉实参 而如果用函数来进行值传递 p中的x y是不变的
+</code></pre>
+<p>再例如熟悉的学生系统 只需要将结构体内的int类型改成命名的数组 然后通过之前的string.h头文件来对数组赋值：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772708563172-373d545e-7502-46bb-8f9f-ddf2c69b3a12.png" alt=""></p>
+<p>对于用函数和指针的区别 函数实际就是将我们需要传递的数据copy一个副本 用副本来传递值 所以不会改变原始数据。而指针直接通过地址的调用改变原始值进行取值</p>
+<h2 id="类型定义">类型定义</h2>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772685911448-665620a3-f083-4777-888f-ff11595d25b2.png" alt=""></p>
+<p>具体用法就是自定义了变量名字</p>
+<p>我们通常给变量赋值都是</p>
+<pre><code class="language-plain">
+int a = 5;
+int b = 10;
+</code></pre>
+<p>而通过typedef</p>
+<pre><code class="language-plain">
+typedef int myType1;
+typedef char myType2;
+
+int main() 
+{
+   myType1 a = 5;
+   myType2 b = 10;
+}
+</code></pre>
+<p>这个东西有啥子作用呢 如果一个程序片段中的所有int类型我们需要改成其他类型 倘若在编写程序的过程中，我们把int 通过typedef改成我们自定义的类型名称 ，就只需要在定义类型名称的地方进行更改即可。</p>
+<p>还有的用法就是</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772700478613-c0fa86ab-a348-4460-8548-6a4e71f9975d.png" alt=""></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772700524227-133461a1-0e3c-414f-84ef-d51bb9e5f93c.png" alt=""></p>
+<p>typedef struct point</p>
+<p>{</p>
+<p>int x ;</p>
+<p>int y ;</p>
+<p>}po;</p>
+<p>typedef struct</p>
+<p>{</p>
+<p>int x ;</p>
+<p>int y ;</p>
+<p>}po;</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+
+typedef struct 
+{
+  int x;
+  int y;
+}po;
+
+int main(int argc, char const *argv[])
+{
+  po p;
+  p.x = 5;
+  p.y = 10;
+  printf(&quot;%d\n&quot;,p.x);
+  printf(&quot;%d\n&quot;,p.y);
+  return 0;
+}
+
+</code></pre>
+<p>之后我们想要使用结构体不需要给结构体命名 直接用typedef给结构体一个别名即可 也省了总是写struct的时间。</p>
+<h1 id="内存分类">内存分类</h1>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772715186343-6b5b111b-a41f-4ee7-9a64-bd64225c3939.png" alt=""></p>
+<p>注：自动内存（栈）的分配逻辑是不受人为掌控的，根据我们的程序机器直接分配。</p>
+<p>而动态内存（堆）是编写过程中人为可以控制分配空间的。</p>
+<p>栈内存（自动内存）由编译器 / 操作系统<strong>自动分配和释放</strong>，分配规则、大小、生命周期完全由程序的执行流程（比如函数调用、变量作用域）决定，程序员无法手动干预；堆内存（动态内存）由程序员<strong>手动调用函数（如 C 语言的 malloc/free、C++ 的 new/delete）</strong> 分配和释放，分配的大小、时机、释放时机完全由程序员控制。</p>
+<h2 id="动态内存分配-malloc">动态内存分配（malloc）</h2>
+<p>1.c语言中 使用malloc函数分配内存：</p>
+<pre><code class="language-plain">
+void* malloc (size_t)// void*表示通用数据类型的指针（各种数据类型的通用）
+                        sizeof函数的返回值类型size_t
+</code></pre>
+<p>如果成功 会返回从堆内存上分配的内存指针</p>
+<p>（为什么返回指针呢？例如你需要让他动态分配某个字节的量来盖房子，房子盖成功了就把房子的地址告诉你）</p>
+<p>如果失败 返回空指针（null）</p>
+<p>2.使用分配的内存（房子盖好了就开始使用了）</p>
+<p>3.（使用完毕）使用free函数释放内存</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int main(int argc, char const *argv[])
+{
+    int *p;
+    p = (int*)malloc(sizeof(int));//p指向这块新开辟的内存地址
+    *p = 15;
+    printf(&quot;%d\n&quot;,*p);
+    free(p);
+    return 0;
+}
+
+</code></pre>
+<p>内存图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772767232336-76e132ea-cf4c-4c8c-a0cd-7cac555cb9a8.png" alt=""></p>
+<p>---</p>
+<h2 id="动态分配-指针-数组">动态分配 指针、数组</h2>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt; //mallco的标准库
+#include &lt;string.h&gt;
+
+int main(int argc, char const *argv[])
+{
+    char *s;//声明char类型指针
+    s = (char*)malloc(10);//开辟10字节的空间，char*强转换为字符型
+    strcpy(s, &quot;Hello&quot;); //通过strcpy函数传入值
+    printf(&quot;%s\n&quot;, s);
+    return 0;
+}
+</code></pre>
+<p>---</p>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char const *argv[])
+{
+    int *arr = (int*)malloc(5 * sizeof(int));
+    for (int i = 0; i &lt; 5; i++)
+    {
+        arr[i] = 0;
+    }
+
+    for (int i = 0; i &lt; 5; i++)
+    {
+        printf(&quot;%d\n&quot;, arr[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+<p>---</p>
+<h2 id="内存分配与结构体">内存分配与结构体</h2>
+<pre><code class="language-plain">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+typedef struct{
+    int x;
+    int y;
+}po; //创建结构体po
+
+int main(int argc, char const *argv[])
+{
+    po *p; //声明结构体po类型的指针p
+    p =(po*)mallco(sizeof(po)); //动态分配内存
+    p-&gt;x = 5;  //(*p.x=5)
+    p-&gt;y = 10; //(*p.y=10)
+    //printf...........
+    return 0;
+}
+</code></pre>
+<p>此时结构体在内存中占用8字节</p>
+<p>深入细节： 如果我换成 char x； int y ； 那么又该占有几个字节呢？ 可能会觉得是 1+4 = 5</p>
+<p>但是答案还是 8个字节。</p>
+<p>这是因为 C 语言中结构体存在 <strong> 内存对齐（Memory Alignment）</strong> 规则，编译器会自动在成员之间插入填充字节（Padding），以满足 CPU 对数据访问效率的要求。</p>
+<ol>
+<li>原始结构体：<code>int x; int y;</code></li>
+</ol>
+<ul>
+<li><code>int</code> 类型通常占用 <strong>4 字节</strong>，并要求 4 字节对齐。</li>
+<li>结构体大小计算：</li>
+<li><code>x</code>：4 字节</li>
+<li><code>y</code>：4 字节</li>
+<li>总大小：<code>4 + 4 = 8</code> 字节，刚好满足对齐要求，无需填充。</li>
+</ul>
+<ol>
+<li>修改后结构体：<code>char x; int y;</code></li>
+</ol>
+<ul>
+<li><code>char</code> 类型占用 <strong>1 字节</strong>，要求 1 字节对齐。</li>
+<li><code>int</code> 类型占用 <strong>4 字节</strong>，要求 4 字节对齐。</li>
+<li>为了让 <code>int y</code> 满足 4 字节对齐的要求，编译器会在 <code>char x</code> 后面插入 <strong>3 字节的填充</strong>，使 <code>y</code> 的起始地址是 4 的倍数。</li>
+<li>结构体大小计算：</li>
+<li><code>x</code>：1 字节</li>
+<li>填充：3 字节</li>
+<li><code>y</code>：4 字节</li>
+<li>总大小：<code>1 + 3 + 4 = 8</code> 字节。</li>
+<li>同时，整个结构体的大小必须是其最大对齐成员（<code>int</code>，4 字节）的整数倍，8 字节满足此条件。</li>
+</ul>
+    </article>
+
+    <aside class="toc">
+      <p>&#30446;&#24405;</p>
+      <nav data-toc></nav>
+    </aside>
+  </main>
+
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">&#25628;&#32034;</h2>
+        <button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button>
+      </div>
+      <label class="search-box">
+        <span>&#20851;&#38190;&#35789;</span>
+        <input type="search" data-search-input autocomplete="off">
+      </label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

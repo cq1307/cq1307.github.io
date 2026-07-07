@@ -136,9 +136,10 @@
         if (!groups.has(name)) groups.set(name, []);
         groups.get(name).push(post);
       });
-      const categoryEntries = groups.size
-        ? [...groups.entries()]
-        : defaultCategories.map((name) => [name, []]);
+      const categoryEntries = defaultCategories.map((name) => [name, groups.get(name) || []]);
+      groups.forEach((items, name) => {
+        if (!defaultCategories.includes(name)) categoryEntries.push([name, items]);
+      });
       categoriesContainer.innerHTML = `
         <section class="taxonomy-board" aria-label="分类目录">
           ${renderTaxonomyGroups(categoryEntries, false)}

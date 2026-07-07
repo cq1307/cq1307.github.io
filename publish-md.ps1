@@ -97,6 +97,30 @@ function Get-Excerpt([string]$Markdown) {
   return ""
 }
 
+function Convert-YuqueInlineText([string]$Text) {
+  $s = [regex]::Replace($Text, '<([A-Za-z0-9_./+-]+\.h)>', '&lt;$1&gt;')
+  $s = [regex]::Replace($s, '</?(font|span|u)\b[^>]*>', '', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+  $s = [regex]::Replace($s, '<[^>]+>', '')
+  return ([System.Net.WebUtility]::HtmlDecode($s)).Trim()
+}
+
+function Convert-YuqueMarkdown([string]$Markdown) {
+  $text = $Markdown
+  $text = [regex]::Replace($text, '<br\s*/?>', "`n", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+  $text = [regex]::Replace($text, '<h([1-6])\b[^>]*>(.*?)</h\1>', {
+    param($match)
+    $level = [int]$match.Groups[1].Value
+    $heading = Convert-YuqueInlineText $match.Groups[2].Value
+    if ([string]::IsNullOrWhiteSpace($heading)) { return "" }
+    return "`n$([string]::new('#', $level)) $heading`n"
+  }, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline)
+  $text = [regex]::Replace($text, '<strong\b[^>]*>(.*?)</strong>', '**$1**', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline)
+  $text = [regex]::Replace($text, '<em\b[^>]*>(.*?)</em>', '*$1*', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline)
+  $text = [regex]::Replace($text, '<code\b[^>]*>(.*?)</code>', '`$1`', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline)
+  $text = [regex]::Replace($text, '</?(font|span|u)\b[^>]*>', '', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+  return $text
+}
+
 function Get-HashText([string]$Text, [int]$Length = 8) {
   $sha = [System.Security.Cryptography.SHA1]::Create()
   $bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
@@ -197,7 +221,7 @@ function Convert-MarkdownToHtml([string]$Markdown) {
       continue
     }
 
-    if ($line -match '^\s*[-*]\s+(.+)$') {
+    if ($line -match '^\s*[-*+]\s+(.+)$') {
       Flush-Paragraph
       if ($inOl) { $html.Add("</ol>"); $inOl = $false }
       if (-not $inUl) { $html.Add("<ul>"); $inUl = $true }
@@ -330,13 +354,16 @@ function Read-PostsData([string]$DataFile) {
   $raw = Get-Content -LiteralPath $DataFile -Raw -Encoding UTF8
   if ($raw -notmatch '(?s)window\.BLOG_POSTS\s*=\s*(\[.*\])\s*;?\s*$') { return @() }
   $json = $matches[1]
-  return @($json | ConvertFrom-Json)
+  $parsed = $json | ConvertFrom-Json
+  if ($null -eq $parsed) { return @() }
+  return @($parsed | Where-Object { $_ -and $_.url })
 }
 
 function Write-PostsData([string]$DataFile, $Posts) {
-  $json = ConvertTo-Json -InputObject @($Posts) -Depth 8
+  $cleanPosts = @($Posts | Where-Object { $_ -and $_.url })
+  $json = ConvertTo-Json -InputObject $cleanPosts -Depth 8
   $content = "window.BLOG_POSTS = $json;`n"
-  Set-Content -LiteralPath $DataFile -Value $content -Encoding UTF8
+  [System.IO.File]::WriteAllText($DataFile, $content, [System.Text.UTF8Encoding]::new($false))
 }
 
 if (-not $MarkdownPath) {
@@ -356,6 +383,7 @@ if ($rawText -match '(?s)^---\s*\r?\n(.*?)\r?\n---\s*\r?\n(.*)$') {
   $front = Parse-FrontMatter $matches[1]
   $body = $matches[2]
 }
+$body = Convert-YuqueMarkdown $body
 
 $title = if ($front.ContainsKey("title")) { [string]$front["title"] } else { Get-FirstMarkdownTitle $body ([System.IO.Path]::GetFileNameWithoutExtension($MarkdownPath)) }
 $date = if ($front.ContainsKey("date")) { [string]$front["date"] } else { (Get-Date).ToString("yyyy-MM-dd") }
