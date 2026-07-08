@@ -2359,3 +2359,45 @@ body[data-page="home"] .hero-mask,
   background: rgba(255, 255, 255, 0.16);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26);
 }
+
+/* Move the personal identity block from the home hero into the about page. */
+body[data-page="home"] .hero {
+  place-items: stretch;
+}
+
+body[data-page="about"] .about-identity {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(620px, 100%);
+  margin: 0 auto clamp(18px, 4vw, 36px);
+}
+
+body[data-page="about"] .about-identity .hero-avatar {
+  width: clamp(168px, 24vw, 260px);
+}
+
+body[data-page="about"] .about-identity .hero-links {
+  margin-bottom: 18px;
+}
+
+body[data-page="about"] .profile {
+  grid-column: span 2;
+  text-align: left;
+}
+
+body[data-page="about"] .profile h2 {
+  margin-top: 0;
+}
+
+body[data-page="about"] .profile p,
+body[data-page="about"] .skill-list,
+body[data-page="about"] .skill-list li {
+  color: rgba(22, 50, 71, 0.78);
+}
+
+@media (max-width: 760px) {
+  body[data-page="about"] .profile,
+  body[data-page="about"] .simple-card {
+    grid-column: 1;
+  }
+}
