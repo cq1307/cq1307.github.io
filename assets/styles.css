@@ -2891,3 +2891,18 @@ body[data-page="links"] .post-hero,
 body[data-page="about"] .post-hero {
   padding: 112px 0 58px;
 }
+
+body[data-page="links"]::before {
+  background: url("links-bg-snow.png") center 42% / cover no-repeat;
+  background-attachment: fixed;
+}
+
+body[data-page="links"] .site-header.compact {
+  background: transparent;
+}
+
+body[data-page="links"] .page-shell {
+  background:
+    linear-gradient(135deg, rgba(5, 16, 24, 0.36), rgba(12, 29, 40, 0.18)),
+    rgba(244, 250, 255, 0.06);
+}
