@@ -2362,7 +2362,7 @@ body[data-page="home"] .hero-mask,
 
 /* Move the personal identity block from the home hero into the about page. */
 body[data-page="home"] .hero {
-  place-items: stretch;
+  place-items: center;
 }
 
 body[data-page="about"] .about-identity {
@@ -2400,4 +2400,309 @@ body[data-page="about"] .skill-list li {
   body[data-page="about"] .simple-card {
     grid-column: 1;
   }
+}
+
+/* Clean home hero: keep only the background and the line. */
+body[data-page="home"] .hero-content {
+  display: grid;
+  place-items: center;
+  min-height: 38px;
+}
+
+body[data-page="home"] .subtitle {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.6vw, 3.2rem);
+  line-height: 1.35;
+}
+
+body[data-page="home"] .subtitle span::after {
+  margin-left: 0.08em;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 4px 0 22px;
+}
+
+body[data-page="about"] .profile-avatar {
+  width: 118px;
+  height: 118px;
+  margin: 0 0 14px;
+}
+
+.profile-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #163247;
+  background: rgba(244, 251, 255, 0.66);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.76),
+    0 14px 34px rgba(12, 45, 66, 0.14);
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-link svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.profile-link::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  transform: translate(-50%, -4px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #163247;
+  background: rgba(244, 251, 255, 0.74);
+  box-shadow: 0 12px 26px rgba(12, 45, 66, 0.12);
+  font-size: 0.78rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.profile-link:hover,
+.profile-link:focus-visible {
+  transform: translateY(-4px) scale(1.05);
+  color: #0c2a42;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 18px 38px rgba(12, 45, 66, 0.18);
+}
+
+.profile-link:hover::after,
+.profile-link:focus-visible::after {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+body[data-page="about"] .profile p,
+body[data-page="about"] .skill-list li {
+  color: rgba(38, 65, 84, 0.76);
+}
+
+body[data-page="about"] .skill-list li::before {
+  color: #b4913d;
+}
+
+/* Unified transparent blurred content panels. */
+body[data-page] .content-band,
+body[data-page] .taxonomy-board,
+body[data-page] .timeline,
+body[data-page="about"] .about-layout,
+body[data-page="links"] .page-shell,
+body[data-page] .article-body,
+body[data-page] .toc,
+body[data-page] .search-panel {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(135deg, rgba(7, 20, 34, 0.34), rgba(8, 22, 36, 0.18)),
+    rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+  backdrop-filter: blur(22px) saturate(1.05);
+  -webkit-backdrop-filter: blur(22px) saturate(1.05);
+}
+
+/* Softer typography and readable ink colors for glass surfaces. */
+:root {
+  --text: #17324a;
+  --muted: rgba(49, 76, 96, 0.76);
+  --amber: #9b7830;
+  --cyan: #2d93aa;
+  --font-body: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+  --font-display: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+  --font-cjk-display: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+}
+
+body,
+button,
+input {
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.brand,
+.nav-menu a,
+.icon-button,
+.eyebrow,
+.subtitle,
+.post-hero h1,
+.section-heading h2,
+.timeline h2,
+.simple-card h2,
+.exchange-box h2,
+.profile h2,
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.toc p,
+.post-card h3,
+body[data-page="home"] .section-heading h2,
+body[data-page="home"] .post-card h3,
+.taxonomy-group-head h2,
+.taxonomy-post-title {
+  font-family: var(--font-body);
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+.brand {
+  color: #143047;
+  font-weight: 700;
+}
+
+.nav-menu a,
+.icon-button {
+  color: rgba(20, 48, 71, 0.84);
+  font-weight: 500;
+}
+
+.eyebrow {
+  color: #947231;
+  font-weight: 650;
+  text-transform: none;
+}
+
+.subtitle,
+body[data-page="home"] .subtitle {
+  color: #123149;
+  font-weight: 600;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.74),
+    0 12px 28px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle span::after {
+  color: #2d93aa;
+}
+
+.post-hero h1,
+.section-heading h2,
+.timeline h2,
+.simple-card h2,
+.exchange-box h2,
+.profile h2,
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.toc p,
+.post-card h3,
+body[data-page="home"] .section-heading h2,
+body[data-page="home"] .post-card h3,
+.taxonomy-group-head h2,
+.taxonomy-post-title {
+  color: #17324a;
+  font-weight: 650;
+}
+
+.post-hero p:last-child,
+.post-card p,
+body[data-page="home"] .post-card p,
+.article-body p,
+.article-body li,
+.toc a,
+.simple-card p,
+.profile p,
+body[data-page="about"] .profile p,
+body[data-page="about"] .skill-list li,
+.friend-card small,
+.taxonomy-posts a,
+.post-meta,
+body[data-page="home"] .post-card footer {
+  color: rgba(49, 76, 96, 0.76);
+  text-shadow: none;
+}
+
+.post-card footer a,
+body[data-page="home"] .post-card footer a,
+.simple-card a,
+.timeline time,
+.taxonomy-group-head span {
+  color: #8d6f2f;
+  font-weight: 600;
+}
+
+.post-card:hover h3,
+body[data-page="home"] .post-card:hover h3 {
+  color: #0f2b42;
+  text-shadow: 0 10px 24px rgba(255, 255, 255, 0.2);
+}
+
+body[data-page="home"] .section-heading::after,
+body[data-page="home"] .post-card + .post-card,
+.article-body h1,
+.article-body h2 {
+  border-color: rgba(20, 48, 71, 0.16);
+}
+
+/* Contrast pass for transparent panels over mixed light/dark wallpaper. */
+body[data-page] .content-band,
+body[data-page] .taxonomy-board,
+body[data-page] .timeline,
+body[data-page="about"] .about-layout,
+body[data-page="links"] .page-shell,
+body[data-page] .article-body,
+body[data-page] .toc,
+body[data-page] .search-panel {
+  color: rgba(238, 248, 255, 0.94);
+}
+
+body[data-page] .content-band .section-heading h2,
+body[data-page] .content-band .post-card h3,
+body[data-page] .taxonomy-board h2,
+body[data-page] .timeline h2,
+body[data-page="about"] .about-layout h2,
+body[data-page="links"] .page-shell h2,
+body[data-page] .article-body h1,
+body[data-page] .article-body h2,
+body[data-page] .article-body h3,
+body[data-page] .toc p,
+body[data-page] .search-panel h2,
+body[data-page] .taxonomy-post-title {
+  color: rgba(238, 248, 255, 0.96);
+  text-shadow: 0 2px 16px rgba(2, 12, 22, 0.52);
+}
+
+body[data-page] .content-band .post-card p,
+body[data-page] .content-band .post-card footer,
+body[data-page] .article-body p,
+body[data-page] .article-body li,
+body[data-page] .toc a,
+body[data-page] .simple-card p,
+body[data-page] .profile p,
+body[data-page="about"] .skill-list li,
+body[data-page] .friend-card small,
+body[data-page] .taxonomy-posts a,
+body[data-page] .search-results a span {
+  color: rgba(222, 238, 248, 0.82);
+  text-shadow: 0 1px 10px rgba(2, 12, 22, 0.38);
+}
+
+body[data-page] .content-band .eyebrow,
+body[data-page] .content-band .post-card footer a,
+body[data-page] .simple-card a,
+body[data-page] .timeline time,
+body[data-page] .taxonomy-group-head span,
+body[data-page="about"] .skill-list li::before {
+  color: #e0c36d;
+  text-shadow: 0 1px 10px rgba(2, 12, 22, 0.36);
+}
+
+body[data-page] .content-band .section-heading::after,
+body[data-page] .content-band .post-card + .post-card,
+body[data-page] .article-body h1,
+body[data-page] .article-body h2 {
+  border-color: rgba(238, 248, 255, 0.2);
 }
