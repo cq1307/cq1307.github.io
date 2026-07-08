@@ -1,5 +1,20 @@
 window.BLOG_POSTS = [
     {
+        "title": "手脱压缩壳（IS2025 xtea为例）",
+        "url": "post-20260708-is2025-xtea-unpack.html",
+        "date": "2026-07-08",
+        "categories": [
+            "ctf"
+        ],
+        "tags": [
+            "CTF",
+            "逆向",
+            "脱壳",
+            "XTEA"
+        ],
+        "summary": "以 IS2025 xtea 为例，记录压缩壳与加密壳、ESP 定律、OEP 寻找、Dump 与 IAT 修复流程。"
+    },
+    {
         "title": "汇编",
         "url": "post-20260708-assembly.html",
         "date": "2026-07-08",
