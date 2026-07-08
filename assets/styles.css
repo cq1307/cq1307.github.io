@@ -2892,6 +2892,14 @@ body[data-page="about"] .post-hero {
   padding: 112px 0 58px;
 }
 
+body[data-page="archives"] .site-header.compact,
+body[data-page="categories"] .site-header.compact,
+body[data-page="tags"] .site-header.compact,
+body[data-page="links"] .site-header.compact,
+body[data-page="about"] .site-header.compact {
+  min-height: clamp(520px, 68svh, 680px);
+}
+
 body[data-page="links"]::before {
   background: url("links-bg-snow.png") center 42% / cover no-repeat;
   background-attachment: fixed;
