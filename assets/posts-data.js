@@ -1,5 +1,20 @@
 window.BLOG_POSTS = [
     {
+        "title": "SMC（极客2025为例）",
+        "url": "post-20260708-geek2025-smc.html",
+        "date": "2026-07-08",
+        "categories": [
+            "ctf"
+        ],
+        "tags": [
+            "CTF",
+            "逆向",
+            "SMC",
+            "极客2025"
+        ],
+        "summary": "以极客 2025 SMC 题为例，记录自修改代码、VirtualProtect、动态调试与 SMC 重新分析思路。"
+    },
+    {
         "title": "手脱压缩壳（IS2025 xtea为例）",
         "url": "post-20260708-is2025-xtea-unpack.html",
         "date": "2026-07-08",
