@@ -4,7 +4,7 @@ window.BLOG_POSTS = [
         "url": "post-20260708-geek2025-smc.html",
         "date": "2026-07-08",
         "categories": [
-            "ctf"
+            "CTF"
         ],
         "tags": [
             "CTF",
@@ -19,7 +19,7 @@ window.BLOG_POSTS = [
         "url": "post-20260708-is2025-xtea-unpack.html",
         "date": "2026-07-08",
         "categories": [
-            "ctf"
+            "CTF"
         ],
         "tags": [
             "CTF",

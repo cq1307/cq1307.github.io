@@ -342,7 +342,7 @@ $BodyHtml
 
   <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
 $(Get-SearchModalHtml)
-  <script src="assets/posts-data.js?v=20260708-smc"></script>
+  <script src="assets/posts-data.js?v=20260708-ctfcase"></script>
   <script src="assets/app.js?v=20260708-book-toc"></script>
 </body>
 </html>
