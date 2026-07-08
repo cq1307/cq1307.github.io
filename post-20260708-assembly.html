@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>汇编 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260708-link-intro">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">语言</p>
+      <h1>汇编</h1>
+      <p>2026-07-08 &middot; 汇编基础笔记，整理计算机架构、寄存器、栈结构、x32dbg、FS/TEB、PEB 与常见汇编指令。</p>
+    </section>
+  </header>
+
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<hr>
+<h1 id="前言引导">前言引导</h1>
+<p>CPU：负责执行计算机的所有指令</p>
+<p>汇编语言：为了更加便于阅读、理解，是一种使用助记符的表示指令的语言 每条汇编指令直接映射一条机器指令</p>
+<p>MOV ：表示将数据移动到寄存器</p>
+<p>ADD：表示将两个数相加</p>
+<p>JMP：表示跳转到某位置</p>
+<p>.............................................................</p>
+<h1 id="计算机架构">计算机架构</h1>
+<p>注：不同架构的汇编语言有很大不同</p>
+<h2 id="什么是架构">什么是架构</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-001.png" alt="image.png" loading="lazy"></figure>
+<h2 id="x86架构-电脑">X86架构（电脑）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-002.png" alt="image.png" loading="lazy"></figure>
+<h2 id="arm架构-手机">ARM架构（手机）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-003.png" alt="image.png" loading="lazy"></figure>
+<h2 id="不同架构汇编指令的区分">不同架构汇编指令的区分</h2>
+<p>通俗点说X64是X86的升级版</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-004.png" alt="image.png" loading="lazy"></figure>
+<h1 id="数据宽度">数据宽度</h1>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-005.png" alt="image.png" loading="lazy"></figure>
+<h1 id="汇编基础一">汇编基础一</h1>
+<h2 id="系统硬件组成">系统硬件组成</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-006.png" alt="image.png" loading="lazy"></figure>
+<h3 id="cpu-中央处理器">CPU(中央处理器)</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-007.png" alt="image.png" loading="lazy"></figure>
+<h3 id="寄存器-registers">寄存器（Registers）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-008.png" alt="image.png" loading="lazy"></figure>
+<h3 id="内存-ram主存储器">内存（RAM主存储器）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-009.png" alt="image.png" loading="lazy"></figure>
+<h3 id="内存总线-之前学的叫数据总线">内存总线（之前学的叫数据总线）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-010.png" alt="image.png" loading="lazy"></figure>
+<h2 id="内存与内存地址">内存与内存地址</h2>
+<h2 id="内存-存东西的">内存（存东西的）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-011.png" alt="image.png" loading="lazy"></figure>
+<h2 id="内存地址-内存的身份证">内存地址（内存的身份证）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-012.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-013.png" alt="image.png" loading="lazy"></figure>
+<h2 id="程序内存的分块-代码段-数据段-堆-栈">程序内存的分块（ 代码段 数据段 堆 栈 ）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-014.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-015.png" alt="image.png" loading="lazy"></figure>
+<h2 id="内存访问权限">内存访问权限</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-016.png" alt="image.png" loading="lazy"></figure>
+<p>看到权限刚好最近在看极客2025的一道SMC自修改代码题型但是在下断点的位置有点懵</p>
+<h1 id="汇编基础二-寄存器">汇编基础二 寄存器</h1>
+<p>寄存器的大小与CPU位数有关</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-017.png" alt="image.png" loading="lazy"></figure>
+<h2 id="通用寄存器-eax-返回值-sp-栈顶-bp-栈底">通用寄存器（EAX：返回值 SP：栈顶 BP：栈底）</h2>
+<p>EAX 累加寄存器 ：Windows的代码中通常用来存放结果（返回值）。</p>
+<p>EBX基址寄存器....................................</p>
+<p>ECX计数寄存器.....................................</p>
+<p>EDX数据寄存器：用以储存乘法 除法的结果 或与I/O操作相关。</p>
+<p>.......................................</p>
+<p>EBP:基指针寄存器 用于保存栈帧的基地址（函数调用时，栈的管理非常依赖它）。</p>
+<p>栈底--因为EBP指向栈这种数据结构的底部，所以叫栈底</p>
+<p>ESP：堆栈指示寄存器，用于指向当前栈顶位置，栈的push /pop操作都依赖它。</p>
+<p>涉及堆栈平衡非常重要</p>
+<p>栈顶--因为ESP指向栈这种数据结构的顶部，所以叫栈顶</p>
+<p>在x86-64（64位）中 寄存器名字略有变化 功能类似</p>
+<p>RAX RBX RCX RDX RSI RBP RSP...................</p>
+<h2 id="段寄存器-简单了解-windows-历史遗留物">段寄存器（简单了解 Windows 历史遗留物）</h2>
+<p>最初用于内存管理， 现在不再使用，而采用平坦地址空间模型，即直接使用线性地址。</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-018.png" alt="image.png" loading="lazy"></figure>
+<p>Windows和其他操作系统通常采用分页机制来管理内存，而不再用传统的基于段的内存管理方式</p>
+<p>若非要钻牛角尖，可以关注FS寄存器（汇编基础六中fs：[0]中有提到）</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-019.png" alt="image.png" loading="lazy"></figure>
+<h2 id="指令指针寄存器-eip-rip显示下一个指令">指令指针寄存器（eip/rip显示下一个指令）</h2>
+<p>EIP：指令指针寄存器 ，指向CPU正在执行的下一条指令的内存地址，在64位架构中为RIP</p>
+<p>EIP只存在CPU中，无指令能够修改</p>
+<p>通过异常处理机制可以实现修改EIP</p>
+<pre><code>//修改上下文，跳过int3指令，继续执行
+PExceptionInfo-&gt;ContextRecord-&gt;Eip += 1; //跳过一字节，即int3指令的长度</code></pre>
+<p>VT技术中对EIP有虚拟化，可以对虚拟化的EIP直接修改</p>
+<h2 id="标志寄存器-判断程序执行逻辑的寄存器">标志寄存器（判断程序执行逻辑的寄存器）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-020.png" alt="image.png" loading="lazy"></figure>
+<h2 id="控制寄存器-control-registers-无用">控制寄存器（control registers)(无用)</h2>
+<p>控制寄存器用于控制cpu的执行模式和特性。这些寄存器通常在更低层的系统编程中使用。<br>cr0到cr4:这些寄存器控制cpu的不同特性，如保护模式，分页机制，缓存策略等。</p>
+<h2 id="浮点寄存器">浮点寄存器</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-021.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-022.png" alt="image.png" loading="lazy"></figure>
+<h2 id="调试寄存器-与硬件调试有关">调试寄存器（与硬件调试有关）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-023.png" alt="image.png" loading="lazy"></figure>
+<p>调试寄存器是硬件调试的核心组件，提供了一种高效监视内存访问或指令执行的方法。在<br>现代调试器（如x32dbg)中，硬件断点的设置与管理已经被工具简化，但理解调试寄存<br>器的底层原理对于深入调试和逆向工程非常重要。</p>
+<h1 id="汇编基础三-汇编指令的基础结构">汇编基础三 汇编指令的基础结构</h1>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-024.png" alt="image.png" loading="lazy"></figure>
+<h2 id="1-指令-操作码-动作-操作数-被操作对象">1.指令（操作码：动作 操作数：被操作对象）</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-025.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-026.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-027.png" alt="image.png" loading="lazy"></figure>
+<h1 id="汇编基础四-栈结构">汇编基础四 栈结构</h1>
+<h2 id="栈结构">栈结构</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-028.png" alt="image.png" loading="lazy"></figure>
+<h2 id="栈的基本操作">栈的基本操作</h2>
+<p>1.push（入栈）：将数据压入栈顶</p>
+<p>2.pop（出栈）：将栈顶数据移出并返回</p>
+<p>放入数据后，一直是ESP在变化，ESP为栈顶，EBP为栈底</p>
+<h4 id="蜜汁小汉堡">蜜汁小汉堡</h4>
+<p>上是 S，下是 B</p>
+<p>放入数据后 都是ESP在变化，EBP就是地基</p>
+<p>栈地址的变化须知 ：</p>
+<p>不断的压栈（push）数据，ESP的地址一直减小，不断地向上堆积，并且减小</p>
+<h1 id="汇编基础五-数据传输指令">汇编基础五 数据传输指令</h1>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-029.png" alt="image.png" loading="lazy"></figure>
+<h2 id="dbg-快捷键-f8-单步执行一行代码-ctrl-g跳转某个地址">dbg 快捷键 ：F8 单步执行一行代码 CTRL+G跳转某个地址</h2>
+<h1 id="汇编基础六-使用x32dbg-学习fs与teb">汇编基础六 使用x32dbg 学习FS与TEB</h1>
+<h3 id="fs段寄存器的介绍">fs段寄存器的介绍</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-030.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-019.png" alt="image.png" loading="lazy"></figure>
+<h3 id="在dbg中查看fs-0-中数据的两种方法">在dbg中查看fs：[0]中数据的两种方法</h3>
+<p>方法一 输入命令：fs:[0] 后回车</p>
+<p>方法二 直接双击fs寄存器</p>
+<h3 id="teb-线程环境块">TEB（线程环境块）</h3>
+<h4 id="teb的结构与用途">TEB的结构与用途</h4>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-031.png" alt="image.png" loading="lazy"></figure>
+<h4 id="了解线程和进程">了解线程和进程</h4>
+<p>现在电脑上正在运行的进程</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-032.png" alt="image.png" loading="lazy"></figure>
+<p>例如微信这个进程又是由很多的线程组成的，可以是来自系统的线程 输入法的线程 微信程序自身的线程</p>
+<p>进程是外壳，内部是由线程来构成的</p>
+<h4 id="teb的结构">TEB的结构</h4>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-033.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-034.png" alt="image.png" loading="lazy"></figure>
+<h2 id="汇编基础七-peb与反调试">汇编基础七：PEB与反调试</h2>
+<h3 id="peb">PEB</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-035.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-036.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-037.png" alt="image.png" loading="lazy"></figure>
+<p>靠这两个标黄的程序实现进程中反调试的检测 （在查看线程的工具中找到PEB即可查看调试状态和）</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-038.png" alt="image.png" loading="lazy"></figure>
+<h2 id="汇编基础八-算术运算指令">汇编基础八 算术运算指令</h2>
+<p>基本的数学运算指令</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-039.png" alt="image.png" loading="lazy"></figure>
+<h3 id="mul-无符号乘法">mul（无符号乘法）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-040.png" alt="image.png" loading="lazy"></figure>
+<h3 id="imul-有符号乘法">imul(有符号乘法)</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-041.png" alt="image.png" loading="lazy"></figure>
+<h3 id="div-无符号除法">div （无符号除法）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-042.png" alt="image.png" loading="lazy"></figure>
+<h3 id="idiv-有符号除法">idiv（有符号除法）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-043.png" alt="image.png" loading="lazy"></figure>
+<h2 id="位操作指令">位操作指令</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-044.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-045.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-046.png" alt="image.png" loading="lazy"></figure>
+<h2 id="汇编基础十-逻辑比较指令">汇编基础十 逻辑比较指令</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-047.png" alt="image.png" loading="lazy"></figure>
+<h3 id="cmp-比较只会更改标志寄存器">CMP（比较只会更改标志寄存器）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-048.png" alt="image.png" loading="lazy"></figure>
+<h3 id="test-按位与的判断">test（按位与的判断）</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-049.png" alt="image.png" loading="lazy"></figure>
+<h2 id="汇编基础十一-控制转移指令">汇编基础十一 控制转移指令</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-050.png" alt="image.png" loading="lazy"></figure>
+<h3 id="重点">重点</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-051.png" alt="image.png" loading="lazy"></figure>
+<h3 id="call">call</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-052.png" alt="image.png" loading="lazy"></figure>
+<p>call其实可以说就是先跳转到子程序执行，把下一步指令地址飞雷神（压入）到自己的子程序，执行完子程序就回到下一步指令</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-053.png" alt="image.png" loading="lazy"></figure>
+<h2 id="汇编基础十二-栈操作指令">汇编基础十二 栈操作指令</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-054.png" alt="image.png" loading="lazy"></figure>
+<h3 id="leave">LEAVE</h3>
+<p>用于X86汇编的一条指令 用来函数返回前进行栈帧清理 单纯用来节省内存 相对于两条指令</p>
+<pre><code>mov ESP,EBP
+pop EBP</code></pre>
+<h2 id="汇编基础十三-字符串操作指令-知道了解即可">汇编基础十三 字符串操作指令(知道了解即可)</h2>
+<h3 id="mov指令">mov指令</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-055.png" alt="image.png" loading="lazy"></figure>
+<h3 id="rep-movsb指令">rep movsb指令</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-056.png" alt="image.png" loading="lazy"></figure>
+<p>movs是一组字符串操作指令的统称能够，表示“移动字符串数据”（Move String）。它可以根据操作的数据宽度分类:</p>
+<p>movsb: 移动一个字节 （b表示byte 1字节）</p>
+<p>movsw: 移动一个字 （w表示word 2字节）</p>
+<p>movsd: 移动一个双字（d表示double word 4字节）</p>
+<p>movsq: （64位模式下可用）：移动一个四字（q表是 quad word 8字节）</p>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-057.png" alt="image.png" loading="lazy"></figure>
+<h3 id="cmp指令">cmp指令</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-058.png" alt="image.png" loading="lazy"></figure>
+<h4 id="补充-cmpsb-用于字符串的比较">补充 cmpsb （用于字符串的比较）</h4>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-059.png" alt="image.png" loading="lazy"></figure>
+<h2 id="scas指令">scas指令</h2>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-060.png" alt="image.png" loading="lazy"></figure>
+<h3 id="stos指令">stos指令</h3>
+<figure class="yuque-image"><img src="assets/images/posts/assembly/image-061.png" alt="image.png" loading="lazy"></figure>
+    </article>
+    <aside class="toc" data-toc></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&#8593;</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div>
+      <label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js?v=20260708-assembly"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
+</body>
+</html>
