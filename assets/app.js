@@ -289,10 +289,34 @@
   const toc = document.querySelector("[data-toc]");
   const article = document.querySelector("[data-article]");
   if (toc && article) {
-    const headings = Array.from(article.querySelectorAll("h2[id]"));
+    const headings = Array.from(article.querySelectorAll("h1[id], h2[id], h3[id]"));
     toc.innerHTML = headings.map((heading) => (
-      `<a href="#${heading.id}">${escapeHtml(heading.textContent)}</a>`
+      `<a class="toc-link toc-level-${heading.tagName.slice(1)}" href="#${heading.id}">${escapeHtml(heading.textContent)}</a>`
     )).join("");
+
+    const tocLinks = Array.from(toc.querySelectorAll(".toc-link"));
+    const activateTocLink = (id) => {
+      tocLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+      });
+    };
+
+    if (tocLinks.length) {
+      activateTocLink(headings[0].id);
+    }
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (visible) activateTocLink(visible.target.id);
+      }, {
+        rootMargin: "-16% 0px -68% 0px",
+        threshold: 0.01
+      });
+      headings.forEach((heading) => observer.observe(heading));
+    }
   }
 })();
 

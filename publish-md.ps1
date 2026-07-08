@@ -304,7 +304,7 @@ function New-ArticleHtml($Title, $Date, $Categories, $Summary, $BodyHtml) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10201f">
   <title>$safeTitle - CQ_ Lab</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260708-soft-headings">
+  <link rel="stylesheet" href="assets/styles.css?v=20260708-book-toc">
 </head>
 <body data-page="post">
   <div class="progress" id="progress"></div>
@@ -343,7 +343,7 @@ $BodyHtml
   <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
 $(Get-SearchModalHtml)
   <script src="assets/posts-data.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
 </body>
 </html>
 "@
