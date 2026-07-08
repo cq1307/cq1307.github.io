@@ -2706,3 +2706,33 @@ body[data-page] .article-body h1,
 body[data-page] .article-body h2 {
   border-color: rgba(238, 248, 255, 0.2);
 }
+
+/* Rounded display titles: smoother and more playful than bold system sans. */
+:root {
+  --font-heading-soft: "ZCOOL KuaiLe", "YouYuan", "\5e7c\5706", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+body[data-page] .content-band .section-heading h2,
+body[data-page] .content-band .post-card h3,
+body[data-page] .taxonomy-board h2,
+body[data-page] .timeline h2,
+body[data-page="about"] .about-layout h2,
+body[data-page="links"] .page-shell h2,
+body[data-page] .article-body h1,
+body[data-page] .article-body h2,
+body[data-page] .article-body h3,
+body[data-page] .search-panel h2,
+body[data-page] .taxonomy-post-title {
+  font-family: var(--font-heading-soft);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-shadow: 0 2px 14px rgba(2, 12, 22, 0.38);
+}
+
+body[data-page] .content-band .section-heading h2 {
+  font-size: clamp(2.1rem, 5vw, 3.9rem);
+}
+
+body[data-page] .content-band .post-card h3 {
+  font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+}
