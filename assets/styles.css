@@ -2868,14 +2868,19 @@ body[data-page="post"] .toc::-webkit-scrollbar-thumb {
 
 body[data-page="archives"] .post-hero .eyebrow,
 body[data-page="archives"] .post-hero h1,
+body[data-page="archives"] .post-hero p,
 body[data-page="categories"] .post-hero .eyebrow,
 body[data-page="categories"] .post-hero h1,
+body[data-page="categories"] .post-hero p,
 body[data-page="tags"] .post-hero .eyebrow,
 body[data-page="tags"] .post-hero h1,
+body[data-page="tags"] .post-hero p,
 body[data-page="links"] .post-hero .eyebrow,
 body[data-page="links"] .post-hero h1,
+body[data-page="links"] .post-hero p,
 body[data-page="about"] .post-hero .eyebrow,
-body[data-page="about"] .post-hero h1 {
+body[data-page="about"] .post-hero h1,
+body[data-page="about"] .post-hero p {
   display: none;
 }
 
@@ -2884,16 +2889,5 @@ body[data-page="categories"] .post-hero,
 body[data-page="tags"] .post-hero,
 body[data-page="links"] .post-hero,
 body[data-page="about"] .post-hero {
-  padding: 156px 0 92px;
-}
-
-body[data-page="archives"] .post-hero p:last-child,
-body[data-page="categories"] .post-hero p:last-child,
-body[data-page="tags"] .post-hero p:last-child,
-body[data-page="links"] .post-hero p:last-child,
-body[data-page="about"] .post-hero p:last-child {
-  margin-top: 0;
-  font-size: clamp(1rem, 2.2vw, 1.28rem);
-  color: rgba(238, 247, 255, 0.82);
-  text-shadow: 0 16px 34px rgba(0, 0, 0, 0.44);
+  padding: 112px 0 58px;
 }
