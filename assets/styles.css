@@ -3113,12 +3113,6 @@ body[data-page="about"] .profile .profile-lead {
   line-height: 1.66;
 }
 
-body[data-page="about"] .profile strong {
-  color: #fff3c4;
-  font-weight: 650;
-  text-shadow: 0 2px 16px rgba(2, 12, 22, 0.42);
-}
-
 @media (max-width: 760px) {
   body[data-page="links"] .friend-card {
     grid-template-columns: 64px minmax(0, 1fr);
