@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10201f">
-  <title>C语言重点 - CQ_ Lab</title>
+  <title>C语言进阶 - CQ_ Lab</title>
   <link rel="stylesheet" href="assets/styles.css?v=20260708-book-toc">
 </head>
 <body data-page="post">
@@ -25,24 +25,24 @@
     </nav>
     <section class="post-hero">
       <p class="eyebrow">语言</p>
-      <h1>C语言重点</h1>
-      <p>2026-07-07 &middot; C 语言函数、参数、返回值与基础语法重点整理。</p>
+      <h1>C语言进阶</h1>
+      <p>2026-07-07 &middot; C 语言函数、指针、结构体与动态内存重点整理。</p>
     </section>
   </header>
 
   <main class="article-layout">
     <article class="article-body" data-article>
 <h1 id="函数">函数</h1>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1768374546049-507ad463-f115-4add-a30a-04280f85f1a7.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-01.png" alt=""></p>
 <p>这是一段求和的代码 那么我的程序中需要用很多次这个求和过程，就需要每次都写一遍</p>
 <p>所以用函数我们就可以简化这个过程，将我们的过程封装成函数，每次调用只要写函数名即可</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772123515235-c515e4ba-a76f-4961-8d28-bb0192d73163.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1768374687440-01baac19-2c65-4d4c-a24f-2405773ea488.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-02.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-03.png" alt=""></p>
 <p>对内隐藏细节 对外暴露接口</p>
 <p>函数的基本声明结构</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178322835-ae71bfe4-8440-4ac0-ae38-6982df4d6921.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-04.png" alt=""></p>
 <p>拓展一下几类函数 对应的不同就是 参数 和 返回值</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178375721-cc52cbfd-94ef-4da5-a45d-7f7358f3d386.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-05.png" alt=""></p>
 <h3 id="先总结-无返回值用void-有返回值用int">先总结 无返回值用void 有返回值用int</h3>
 <h3 id="1-无返回值-无参数">1.无返回值 无参数</h3>
 <pre><code class="language-plain">
@@ -65,7 +65,7 @@ fun();
 return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772178574047-06ec3353-c290-4df8-85ac-907b0a3fea9d.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-06.png" alt=""></p>
 <h3 id="2-有返回值-无参数">2.有返回值 无参数</h3>
 <p>注意  ：返回值返回到哪里？ 哪里调用就返回到哪里</p>
 <pre><code class="language-plain">
@@ -132,10 +132,10 @@ int main ()
 <h1 id="字符串">字符串</h1>
 <p>通常是用数组表示字符串</p>
 <p>将字符串直接声明给数组</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772296952930-08c43d40-4350-4c33-bc53-02a2a8b8f3a4.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-07.png" alt=""></p>
 <p>注意：数组不能被赋值</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772297092360-b8b193c1-6d67-44b2-be3f-1dc529979068.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772297231421-a77a984c-3ad9-471e-8605-c3945e8abfff.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-08.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-09.png" alt=""></p>
 <p>那么如何正确赋值呢 要引入新的C语言头文件库 &lt;string.h&gt;</p>
 <h2 id="string-h-strcpy">&lt;string.h&gt;（strcpy）</h2>
 <p>这个文件库中有一个函数可以对字符型数组赋值</p>
@@ -151,12 +151,12 @@ int main ()
 </code></pre>
 <h1 id="内存">内存</h1>
 <h2 id="冯诺依曼体系的计算机基本结构">冯诺依曼体系的计算机基本结构</h2>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298720613-fad883a1-6809-4862-992c-26e9a38c9b2e.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298097206-8c200aeb-35e2-42c3-bee2-0900342b263c.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-10.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-11.png" alt=""></p>
 <p>存储器严格意义上可分为两部分</p>
 <p>拆分开也可得到我们所认识的外设、主机</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298726147-c4977781-9c99-4db9-9f52-de322d4a78ae.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772298244799-176312d6-5af1-412e-a8f6-615296442830.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-12.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-13.png" alt=""></p>
 <p>注：主存储器就是常说的内存条&#183;  辅助存储器就是硬盘</p>
 <p>扩展一下硬盘与内存条的区别 :</p>
 <p>硬盘就是用来存储数据的，例如电脑上存的各种word文档等各种文件</p>
@@ -164,13 +164,13 @@ int main ()
 <h2 id="虚拟内存地址">虚拟内存地址</h2>
 <p>而内存条 显卡 各种适配卡都有自己的储存地址空间</p>
 <p>而我们的操作系统就将这些设备的储存地址空间抽象为巨大的一维数组 对于内存中的每一个字节都会分配编号 （编号）即为内存地址。</p>
-<p>例如：某硬件有4G的自带内存，<img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299091103-6e5f31c3-6a45-42b1-a2ac-614235f73b39.png" alt=""></p>
+<p>例如：某硬件有4G的自带内存，<img src="assets/images/posts/c-language-advanced/image-14.png" alt=""></p>
 <p>其中&#183;4294967296个字节都会被安排一个32位or64位的编号。</p>
 <p>而我们的个人电脑中 通常都是看到由十六进制表示的</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299318571-7bed187c-eb85-49db-b1d5-36eb32d8a9a7.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-15.png" alt=""></p>
 <p>如果不太理解可以结合AI理解</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299520269-039456cc-9975-4770-ad8f-4963b7df0287.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299546462-b2a5c086-c612-4ac6-baf9-1229383c0e2b.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-16.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-17.png" alt=""></p>
 <p>然后我们用简单的一个代码演示一下 （为了方便 将内存地址用十进制表示）</p>
 <pre><code class="language-plain">
 int main() 
@@ -180,7 +180,7 @@ retrun 1;
 }
 </code></pre>
 <p>内存中就是如图</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772299756984-4c59a2d4-62ab-42ae-9e02-553143592569.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-18.png" alt=""></p>
 <p>question：为什么101过了就是105？ 因为int类型在内存中占4个字节</p>
 <h1 id="数组">数组</h1>
 <p>1.相同数据类型的集合   2.数组的长度定义后不得改变</p>
@@ -198,7 +198,7 @@ int main()
 }
 </code></pre>
 <p>内存图</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772300235263-d9442848-4f00-4684-8d16-bf5098069455.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-19.png" alt=""></p>
 <h2 id="取地址">取地址（&amp;）</h2>
 <p>之前的学习中我们学过一个函数scanf（）而函数中有个&amp;的符号就是取地址符。</p>
 <pre><code class="language-plain">
@@ -211,7 +211,7 @@ printf(&quot;%p\n&quot;,&amp;b);
 return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772300791626-239d10ad-94f0-47c4-91a9-4fca88b25f14.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-20.png" alt=""></p>
 <p>如果你直接取一个数组的地址 eg：</p>
 <pre><code class="language-plain">
 int a[] = (16,47,89,42,38);
@@ -230,7 +230,7 @@ printf(&quot;%zu\n&quot;,sizeof(3.14));
 return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772301349728-61a1189a-f00a-4273-aa29-220b721beedf.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-21.png" alt=""></p>
 <p>所以sizeof就是返回参数在内存中所占用的字节数</p>
 <p>而当我们遍历一个数组却不知道数组的真正长度...............</p>
 <pre><code class="language-plain">
@@ -265,7 +265,7 @@ return 0;
 }
 </code></pre>
 <p>内存中的排布</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772303027559-e1ef3c06-06e9-46d7-b2c2-691093ccf918.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-22.png" alt=""></p>
 <p>我们来验证一下</p>
 <pre><code class="language-plain">
 #include &lt;stdio.h&gt;
@@ -279,7 +279,7 @@ printf(&quot;p的地址为%p,p的值为%p\n&quot;,&amp;p,p)
 return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304126681-9953a9fe-1870-4635-a968-b259c7b11fc0.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-23.png" alt=""></p>
 <p>知道这个我们可以做的事情就很多了</p>
 <h2 id="间接引用操作符-解引用指针-非声明变量条件下">间接引用操作符*（解引用指针）非声明变量条件下</h2>
 <pre><code class="language-plain">
@@ -295,9 +295,9 @@ int main() {
     return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304705883-653e6c00-a08b-4294-8bd6-7244b49d4172.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-24.png" alt=""></p>
 <p>主要理解第三行代码（这也是为什么叫做指针的原因）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772304801342-72ac14aa-1b36-4066-b08e-13844c2b5e46.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-25.png" alt=""></p>
 <h2 id="形参-实参">形参、实参</h2>
 <p>我们之前学过了函数 可以通过函数来实现两个值的互换</p>
 <pre><code class="language-plain">
@@ -412,7 +412,7 @@ return 0;
 <p>return 0;</p>
 <p>}</p>
 <h1 id="指针与数组">指针与数组</h1>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772626494018-2c922631-ef0a-4f25-8a25-99e67aed18d9.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-26.png" alt=""></p>
 <pre><code class="language-c">
 #include &lt;stdio.h&gt;
 int main(int argc, char const *argv[])
@@ -427,7 +427,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772627088159-5991e6ab-a7f1-430f-b0e3-08dd739f198d.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-27.png" alt=""></p>
 <h2 id="用指针遍历数组-其实也可以用p-i">用指针遍历数组（其实也可以用p[i]）</h2>
 <pre><code class="language-plain">
 #include &lt;stdio.h&gt;
@@ -453,10 +453,10 @@ int main()
     return 0;
 }
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772628473319-5ee1c582-4607-4780-84e7-cd1312f677ab.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-28.png" alt=""></p>
 <p>question： 为什么是p+i?那岂不是是一个一个的加 ，但是我们的int类型地址是4个为一组的。</p>
 <h2 id="指针的算数运算">指针的算数运算</h2>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772628834896-996ef3a4-1dbd-466c-82dd-278626d55072.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-29.png" alt=""></p>
 <p>所以当声明了指针的数据类型 例如</p>
 <pre><code class="language-plain">
 int *p(可以自己给p一个值run一下)
@@ -464,10 +464,10 @@ printf(&quot;%p\n&quot;,p);
 p++;
 printf(&quot;%p\n&quot;,p);
 </code></pre>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772629154665-d3ecac52-c27c-4b82-afa2-315ed2f1386c.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-30.png" alt=""></p>
 <p>这个东西也可以说是“步长”这个概念</p>
 <h2 id="各个数据类型的字节数">各个数据类型的字节数</h2>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772629381173-eba86f77-cf8f-4d47-96ad-8589afda06e8.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-31.png" alt=""></p>
 <h1 id="结构体">结构体</h1>
 <p>本质上讲，结构体也是一种数据类型</p>
 <p>结构体的本质是各种变量的集合</p>
@@ -504,7 +504,7 @@ p.y = 15;
 </ul>
 <p>---</p>
 <h2 id="实例">实例</h2>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772674384006-168d29e0-7d15-45db-aea8-8b7ee5df473f.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-32.png" alt=""></p>
 <p>先分析 需要编写函数 函数有参数有返回值 还需要一个结构体来接住函数的参数x、y 最后返回的是结构体。</p>
 <pre><code class="language-plain">
 #include &lt;stdio.h&gt;
@@ -569,10 +569,10 @@ int main()
 //在打印后两个xy都是10 5 通过指针用内存直接改掉实参 而如果用函数来进行值传递 p中的x y是不变的
 </code></pre>
 <p>再例如熟悉的学生系统 只需要将结构体内的int类型改成命名的数组 然后通过之前的string.h头文件来对数组赋值：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772708563172-373d545e-7502-46bb-8f9f-ddf2c69b3a12.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-33.png" alt=""></p>
 <p>对于用函数和指针的区别 函数实际就是将我们需要传递的数据copy一个副本 用副本来传递值 所以不会改变原始数据。而指针直接通过地址的调用改变原始值进行取值</p>
 <h2 id="类型定义">类型定义</h2>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772685911448-665620a3-f083-4777-888f-ff11595d25b2.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-34.png" alt=""></p>
 <p>具体用法就是自定义了变量名字</p>
 <p>我们通常给变量赋值都是</p>
 <pre><code class="language-plain">
@@ -592,8 +592,8 @@ int main()
 </code></pre>
 <p>这个东西有啥子作用呢 如果一个程序片段中的所有int类型我们需要改成其他类型 倘若在编写程序的过程中，我们把int 通过typedef改成我们自定义的类型名称 ，就只需要在定义类型名称的地方进行更改即可。</p>
 <p>还有的用法就是</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772700478613-c0fa86ab-a348-4460-8548-6a4e71f9975d.png" alt=""></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772700524227-133461a1-0e3c-414f-84ef-d51bb9e5f93c.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-35.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-36.png" alt=""></p>
 <p>typedef struct point</p>
 <p>{</p>
 <p>int x ;</p>
@@ -626,7 +626,7 @@ int main(int argc, char const *argv[])
 </code></pre>
 <p>之后我们想要使用结构体不需要给结构体命名 直接用typedef给结构体一个别名即可 也省了总是写struct的时间。</p>
 <h1 id="内存分类">内存分类</h1>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772715186343-6b5b111b-a41f-4ee7-9a64-bd64225c3939.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-37.png" alt=""></p>
 <p>注：自动内存（栈）的分配逻辑是不受人为掌控的，根据我们的程序机器直接分配。</p>
 <p>而动态内存（堆）是编写过程中人为可以控制分配空间的。</p>
 <p>栈内存（自动内存）由编译器 / 操作系统<strong>自动分配和释放</strong>，分配规则、大小、生命周期完全由程序的执行流程（比如函数调用、变量作用域）决定，程序员无法手动干预；堆内存（动态内存）由程序员<strong>手动调用函数（如 C 语言的 malloc/free、C++ 的 new/delete）</strong> 分配和释放，分配的大小、时机、释放时机完全由程序员控制。</p>
@@ -656,7 +656,7 @@ int main(int argc, char const *argv[])
 
 </code></pre>
 <p>内存图</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2026/png/29085138/1772767232336-76e132ea-cf4c-4c8c-a0cd-7cac555cb9a8.png" alt=""></p>
+<p><img src="assets/images/posts/c-language-advanced/image-38.png" alt=""></p>
 <p>---</p>
 <h2 id="动态分配-指针-数组">动态分配 指针、数组</h2>
 <pre><code class="language-plain">
@@ -764,7 +764,7 @@ int main(int argc, char const *argv[])
       <div class="search-results" data-search-results></div>
     </div>
   </div>
-  <script src="assets/posts-data.js"></script>
+  <script src="assets/posts-data.js?v=20260708-yuque-images"></script>
   <script src="assets/app.js?v=20260708-book-toc"></script>
 </body>
 </html>
