@@ -2916,10 +2916,10 @@ body[data-page="links"] .page-shell {
 }
 
 body[data-page="links"] .friend-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 310px));
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: stretch;
   justify-items: stretch;
-  gap: clamp(16px, 2.4vw, 24px);
+  gap: clamp(16px, 2vw, 22px);
   margin: 0 0 clamp(44px, 6vw, 68px);
 }
 
@@ -3114,6 +3114,10 @@ body[data-page="about"] .profile .profile-lead {
 }
 
 @media (max-width: 760px) {
+  body[data-page="links"] .friend-grid {
+    grid-template-columns: 1fr;
+  }
+
   body[data-page="links"] .friend-card {
     grid-template-columns: 64px minmax(0, 1fr);
     min-height: 150px;
@@ -3141,5 +3145,11 @@ body[data-page="about"] .profile .profile-lead {
   body[data-page="about"] .profile p,
   body[data-page="about"] .profile .profile-lead {
     max-width: none;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1020px) {
+  body[data-page="links"] .friend-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
