@@ -2855,6 +2855,12 @@ body[data-page="post"] .toc::-webkit-scrollbar-thumb {
   background: rgba(238, 248, 255, 0.2);
 }
 
+body[data-page="categories"]::before,
+body[data-page="post"]::before {
+  background: url("category-post-bg.png") center 44% / cover no-repeat;
+  background-attachment: fixed;
+}
+
 @media (max-width: 980px) {
   body[data-page="post"] .article-layout {
     grid-template-columns: 1fr;
