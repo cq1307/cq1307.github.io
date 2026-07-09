@@ -2933,15 +2933,15 @@ body[data-page="links"] .friend-grid {
 
 body[data-page="links"] .friend-card {
   position: relative;
-  min-height: 172px;
+  min-height: 224px;
   display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  grid-template-rows: auto auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto minmax(0, 1fr);
   align-content: start;
-  align-items: start;
-  justify-items: stretch;
-  gap: 8px 16px;
-  padding: 22px 20px 20px;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 26px 22px 24px;
   overflow: hidden;
   border: 1px solid rgba(238, 248, 255, 0.2);
   border-radius: 8px;
@@ -2953,7 +2953,7 @@ body[data-page="links"] .friend-card {
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     0 18px 44px rgba(2, 12, 22, 0.18);
   color: rgba(238, 248, 255, 0.94);
-  text-align: left;
+  text-align: center;
   text-decoration: none;
   backdrop-filter: blur(18px) saturate(1.05);
   -webkit-backdrop-filter: blur(18px) saturate(1.05);
@@ -3002,10 +3002,11 @@ body[data-page="links"] .friend-card:focus-visible {
 
 body[data-page="links"] .friend-card .avatar,
 body[data-page="links"] .friend-card img.avatar {
-  grid-row: 1 / 4;
-  width: 74px;
-  height: 74px;
-  align-self: start;
+  grid-row: auto;
+  width: 82px;
+  height: 82px;
+  align-self: center;
+  justify-self: center;
   object-fit: cover;
   border: 2px solid rgba(224, 195, 109, 0.84);
   background: rgba(255, 255, 255, 0.12);
@@ -3026,21 +3027,25 @@ body[data-page="links"] .friend-card:focus-visible img.avatar {
 }
 
 body[data-page="links"] .friend-card strong {
-  align-self: end;
+  align-self: center;
+  max-width: 100%;
   color: rgba(255, 252, 235, 0.96);
   font-family: var(--font-heading-soft);
   font-size: clamp(1.18rem, 2vw, 1.42rem);
   font-weight: 400;
   line-height: 1.2;
+  text-align: center;
   text-shadow: 0 2px 14px rgba(2, 12, 22, 0.46);
 }
 
 body[data-page="links"] .friend-card small {
-  grid-column: 2;
-  min-height: 3.2em;
+  grid-column: auto;
+  max-width: 23ch;
+  min-height: 3.6em;
   color: rgba(222, 238, 248, 0.82);
   font-size: 0.95rem;
   line-height: 1.68;
+  text-align: center;
   text-shadow: 0 1px 10px rgba(2, 12, 22, 0.34);
 }
 
@@ -3127,15 +3132,15 @@ body[data-page="about"] .profile .profile-lead {
   }
 
   body[data-page="links"] .friend-card {
-    grid-template-columns: 64px minmax(0, 1fr);
-    min-height: 150px;
-    padding: 18px;
+    grid-template-columns: 1fr;
+    min-height: 202px;
+    padding: 22px 18px;
   }
 
   body[data-page="links"] .friend-card .avatar,
   body[data-page="links"] .friend-card img.avatar {
-    width: 64px;
-    height: 64px;
+    width: 76px;
+    height: 76px;
   }
 
   body[data-page="links"] .exchange-box {
