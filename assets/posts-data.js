@@ -1,5 +1,20 @@
 window.BLOG_POSTS = [
     {
+        "title": "UniCTF（自解re 纯菜轻喷）",
+        "url": "post-20260709-unictf-re.html",
+        "date": "2026-07-09",
+        "categories": [
+            "CTF"
+        ],
+        "tags": [
+            "CTF",
+            "逆向",
+            "RE",
+            "UniCTF"
+        ],
+        "summary": "UniCTF 个人 RE 自解记录，整理 c_sm4、r_png、Unity IL2CPP、wasm 逆向等题目的分析和 exp 思路。"
+    },
+    {
         "title": "SMC（极客2025为例）",
         "url": "post-20260708-geek2025-smc.html",
         "date": "2026-07-08",
