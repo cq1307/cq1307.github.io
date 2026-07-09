@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&family=Orbitron:wght@600;700;800;900&family=Quicksand:wght@500;600;700&family=Rajdhani:wght@500;600;700&display=swap");
 
 :root {
   color-scheme: dark;
@@ -19,6 +19,7 @@
   --font-body: "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
   --font-display: Orbitron, Rajdhani, "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
   --font-cjk-display: "HarmonyOS Sans SC", "MiSans", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --font-hero-quote: Quicksand, Nunito, "Segoe UI Rounded", "Trebuchet MS", var(--font-body);
 }
 
 [data-theme="dark"] {
@@ -2418,8 +2419,8 @@ body[data-page="home"] .hero-content {
 
 body[data-page="home"] .subtitle {
   margin: 0;
-  font-size: clamp(1.6rem, 4.6vw, 3.2rem);
-  line-height: 1.35;
+  font-size: clamp(1.55rem, 4vw, 2.9rem);
+  line-height: 1.28;
 }
 
 body[data-page="home"] .subtitle span::after {
@@ -2585,7 +2586,8 @@ body[data-page="home"] .post-card h3,
 .subtitle,
 body[data-page="home"] .subtitle {
   color: #123149;
-  font-weight: 600;
+  font-family: var(--font-hero-quote);
+  font-weight: 500;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.74),
     0 12px 28px rgba(255, 255, 255, 0.2);
