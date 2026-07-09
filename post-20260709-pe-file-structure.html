@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>初识PE文件结构 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260709-mobile-nav">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="archives.html">归档</a>
+        <a href="categories.html">分类</a>
+        <a href="tags.html">标签</a>
+        <a href="links.html">友链</a>
+        <a href="about.html">关于</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Reverse_Wiki</p>
+      <h1>初识PE文件结构</h1>
+      <p>2026-07-09 &middot; PE 文件结构入门笔记，整理 PE 工具、PE 指纹、DOS 头、PE 文件头、节表与节数据定位。</p>
+    </section>
+  </header>
+
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<h2 id="查看pe文件的工具">查看PE文件的工具</h2>
+<p>PEID 、studyPE</p>
+<p>使用PE工具即可查看相关的文件信息</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-01.png" alt="image.png" loading="lazy"></figure>
+<h2 id="pe指纹">PE指纹</h2>
+<p>PE指纹其实就是个很简单的东西 用十六进制查看器观察pe文件即可看到这些文件的一些相同点</p>
+<p>PE指纹标志：MZ、PE</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-02.png" alt="image.png" loading="lazy"></figure>
+<p>任一打开纯天然无污染完整无壳的pe文件 可以看到MZ、PE这两个标准 这就是作为PE文件的logo</p>
+<p>也说明了PE文件是有一定规律的 也说明PE文件在字符串上的构成是有规律的，</p>
+<p>这个规律就叫PE指纹。</p>
+<h3 id="pe指纹有什么用呢">PE指纹有什么用呢？</h3>
+<p>可以通过PE指纹揪出伪装的木马</p>
+<p>通常各种格式的PE文件可以通过更改后缀来改变文件格式 但是真正的PE文件格式如何改变都不会影响PE指纹</p>
+<p>（就像小南娘多好看也会有男性的标志性器官）</p>
+<p>所以PE指纹也就是识别是否的PE文件的最重要标识</p>
+<h2 id="pe文件结构全局解密">PE文件结构全局解密</h2>
+<h3 id="pe文件的结构全图">PE文件的结构全图</h3>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-03.png" alt="image.png" loading="lazy"></figure>
+<p>主要分为五个部分（图表右侧）</p>
+<p>最常用的就是下面四个部分：DOS部首、PE文件头、块表、块</p>
+<p>（其中 块表 、块 的称谓名词很多 可能也是节表、节数据 ，或者还可能是区段 ）</p>
+<h3 id="结构顺序">结构顺序</h3>
+<p>PE文件结构遵从“顺序”，文件结构都是按照顺序去布展的</p>
+<p>回到上图 根据我们刚刚看到的PE指纹 可以发现PE文件结构是从图由下到上布展的</p>
+<h3 id="场景区段作用">场景区段作用</h3>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-04.png" alt="image.png" loading="lazy"></figure>
+<p>怎么理解呢..... 直接理解成相关段存放文件的相关信息即可 把这些段暂时理解成容器即可</p>
+<h3 id="pe文件结构代码文档化">PE文件结构代码文档化</h3>
+<p>就像工具说明书一样 微软把参考说明书文档化放在头文件winnt.h中</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-05.png" alt="image.png" loading="lazy"></figure>
+<p>我们先回到这张图</p>
+<h4 id="dos-由mz文件头和dos块组成">DOS： 由MZ文件头和DOS块组成</h4>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-06.png" alt="image.png" loading="lazy"></figure>
+<p>👇</p>
+<p>结构体代码：</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-07.png" alt="image.png" loading="lazy"></figure>
+<p>前面上DOS MZ文件头是64位 所以在16进制查看</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-08.png" alt="image.png" loading="lazy"></figure>
+<p>一行16位 4行64位 前面四行就是DOS MZ文件头</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-09.png" alt="image.png" loading="lazy"></figure>
+<p>PE文件头起始的地方由DOS MZ 文件头中的内容确定</p>
+<p>回到DOS MZ文件头，最后四位就是PE文件头地址</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-10.png" alt="image.png" loading="lazy"></figure>
+<p>小知识点 内存地址在内存中存放时是反序 or 倒叙 所以首地址是00000118</p>
+<p>所以DOS文件头和PE文件头：</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-11.png" alt="image.png" loading="lazy"></figure>
+<p>而DOS文件头和PE文件头之间即为DOS块</p>
+<p>然后我们可以尝试在DOS块中藏信息 例如</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-12.png" alt="image.png" loading="lazy"></figure>
+<p>DOS文件头和PE文件头也可以藏（只要不改变MZ和PE其他都随便动）</p>
+<h2 id="pe文件头">PE文件头</h2>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-13.png" alt="image.png" loading="lazy"></figure>
+<p>一整个PE头就是一个结构体 包括“PE”字符串 20字节的FILE_HEADER结构体 和 224字节的xxx结构体</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-14.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-15.png" alt="image.png" loading="lazy"></figure>
+<h3 id="pe文件头大结构体">PE文件头大结构体</h3>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-16.png" alt="image.png" loading="lazy"></figure>
+<p>4字节的PE标识 20字节的标准PE头 224字节的扩展PE头</p>
+<p>下图就是整个PE头的信息</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-17.png" alt="image.png" loading="lazy"></figure>
+<h3 id="pe标准文件头-印象文件头-结构体">PE标准文件头（印象文件头）结构体</h3>
+<p>内部结构体参数</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-18.png" alt="image.png" loading="lazy"></figure>
+<h4 id="machine-图上错了-是两字节">Machine（图上错了 是两字节）</h4>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-19.png" alt="image.png" loading="lazy"></figure>
+<p>我们的实例中就是 86 64</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-20.png" alt="image.png" loading="lazy"></figure>
+<h4 id="区块数">区块数</h4>
+<p>上图后面的0010就是区块数 刚好就是16个区段</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-21.png" alt="image.png" loading="lazy"></figure>
+<h4 id="时间挫-指向符号表-复活币中符号的个数">时间挫、指向符号表 、复活币中符号的个数</h4>
+<p>程序创建日期和时间</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-22.png" alt="image.png" loading="lazy"></figure>
+<p>剩下的两个不需要了解，用作调试用途很少</p>
+<h4 id="sizeofoptionalheader">SizeOfOptionalHeader</h4>
+<p>这个属性记录下面的IMAGE_OPTIONAL_HEADER32结构体（第二个结构体、扩展PE头）的大小</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-23.png" alt="image.png" loading="lazy"></figure>
+<h4 id="characteristics">Characteristics</h4>
+<p>文件属性</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-24.png" alt="image.png" loading="lazy"></figure>
+<p>实例：</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-25.png" alt="image.png" loading="lazy"></figure>
+<p>通过文件属性可以判断的数据：</p>
+<p>十六进制转换的二进制的数据位可以拿到的信息</p>
+<p>二进制：</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-26.png" alt="image.png" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-27.png" alt="image.png" loading="lazy"></figure>
+<h3 id="image-optional-header32结构体-扩展pe头">IMAGE_OPTIONAL_HEADER32结构体（扩展PE头）</h3>
+<p>看之前的PE文件结构可以看到</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-28.png" alt="image.png" loading="lazy"></figure>
+<p>内容很多 主要抓住代码中红色的即可</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-29.png" alt="image.png" loading="lazy"></figure>
+<h2 id="节表">节表</h2>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-30.png" alt="image.png" loading="lazy"></figure>
+<p>n个40字节大小的结构体组成</p>
+<p>这个n很简单 就是前面在PE头里面所看的区块数</p>
+<p>而这个40字节的结构体</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-31.png" alt="image.png" loading="lazy"></figure>
+<p>结构体内属性作用：</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-32.png" alt="image.png" loading="lazy"></figure>
+<h3 id="节的属性-区块就是节-叫法不一样">节的属性（区块就是节 叫法不一样）</h3>
+<p>按照标准PE头的方法看到区块 如何节的属性呢?</p>
+<p>我们确定节的大小都是40个字节 根据节表可以直接看到节的属性在最后四个字节上 然后又看二进制</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-33.png" alt="image.png" loading="lazy"></figure>
+<h2 id="节数据">节数据</h2>
+<h4 id="定位节数据">定位节数据：</h4>
+<p>直接在studyPE中的节中右键选择查看即可</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-34.png" alt="image.png" loading="lazy"></figure>
+<p>这里在工具中看到</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-35.png" alt="image.png" loading="lazy"></figure>
+<p>原始地址就是基于文件中偏移量的地址</p>
+<p>虚拟地址就是 指这个节被 Windows 加载到内存后，在 进程内存里 的相对位置，也叫 RVA</p>
+<h4 id="手动定位节数据">手动定位节数据：</h4>
+<p>根据节表 节的偏移量在节表的某个属性中。在节的第21个字节</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-36.png" alt="image.png" loading="lazy"></figure>
+<p>这里就是00000400</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-37.png" alt="image.png" loading="lazy"></figure>
+<p>然后根据地址查找</p>
+<p>这里就是.text节的内容</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-38.png" alt="image.png" loading="lazy"></figure>
+<h4 id="节的尺寸查看">节的尺寸查看</h4>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-39.png" alt="image.png" loading="lazy"></figure>
+<p>也就是在节偏移量的前面四个字节</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-40.png" alt="image.png" loading="lazy"></figure>
+<p>可以看到.text节的尺寸是00002c00</p>
+<figure class="yuque-image"><img src="assets/images/posts/pe-file-structure/image-41.png" alt="image.png" loading="lazy"></figure>
+    </article>
+    <aside class="toc" data-toc></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&#8593;</button>
+  <div class="search-modal" data-search-modal hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-head"><h2 id="search-title">搜索</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div>
+      <label class="search-box"><span>关键词</span><input type="search" data-search-input autocomplete="off"></label>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  <script src="assets/posts-data.js?v=20260709-pe-file"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
+</body>
+</html>

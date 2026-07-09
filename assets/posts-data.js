@@ -1,5 +1,20 @@
 window.BLOG_POSTS = [
     {
+        "title": "初识PE文件结构",
+        "url": "post-20260709-pe-file-structure.html",
+        "date": "2026-07-09",
+        "categories": [
+            "Reverse_Wiki"
+        ],
+        "tags": [
+            "Reverse_Wiki",
+            "PE",
+            "Windows",
+            "逆向"
+        ],
+        "summary": "PE 文件结构入门笔记，整理 PE 工具、PE 指纹、DOS 头、PE 文件头、节表与节数据定位。"
+    },
+    {
         "title": "UniCTF（自解re 纯菜轻喷）",
         "url": "post-20260709-unictf-re.html",
         "date": "2026-07-09",
