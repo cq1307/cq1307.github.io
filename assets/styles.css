@@ -2918,6 +2918,11 @@ body[data-page="about"]::before {
   background-attachment: fixed;
 }
 
+body[data-page="archives"]::before {
+  background: url("archives-bg-kuuga.png") center 42% / cover no-repeat;
+  background-attachment: fixed;
+}
+
 body[data-page="links"] .site-header.compact {
   background: transparent;
 }
@@ -3167,6 +3172,10 @@ body[data-page="about"] .profile .profile-lead {
 
   body[data-page="about"]::before {
     background-position: 54% center;
+  }
+
+  body[data-page="archives"]::before {
+    background-position: center 38%;
   }
 }
 
