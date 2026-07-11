@@ -2913,6 +2913,11 @@ body[data-page="links"]::before {
   background-attachment: fixed;
 }
 
+body[data-page="about"]::before {
+  background: url("about-bg-kuuga.jpg") 53% 42% / cover no-repeat;
+  background-attachment: fixed;
+}
+
 body[data-page="links"] .site-header.compact {
   background: transparent;
 }
@@ -3158,6 +3163,10 @@ body[data-page="about"] .profile .profile-lead {
   body[data-page="about"] .profile p,
   body[data-page="about"] .profile .profile-lead {
     max-width: none;
+  }
+
+  body[data-page="about"]::before {
+    background-position: 54% center;
   }
 }
 
