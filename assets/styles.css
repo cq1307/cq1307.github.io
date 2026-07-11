@@ -2923,6 +2923,11 @@ body[data-page="archives"]::before {
   background-attachment: fixed;
 }
 
+body[data-page="tags"]::before {
+  background: url("tags-bg-kuuga.png") 58% 34% / cover no-repeat;
+  background-attachment: fixed;
+}
+
 body[data-page="links"] .site-header.compact {
   background: transparent;
 }
@@ -3176,6 +3181,10 @@ body[data-page="about"] .profile .profile-lead {
 
   body[data-page="archives"]::before {
     background-position: center 38%;
+  }
+
+  body[data-page="tags"]::before {
+    background-position: 61% 28%;
   }
 }
 
