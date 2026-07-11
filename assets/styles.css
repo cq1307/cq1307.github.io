@@ -2924,7 +2924,7 @@ body[data-page="archives"]::before {
 }
 
 body[data-page="tags"]::before {
-  background: url("tags-bg-kuuga.png") 58% 34% / cover no-repeat;
+  background: url("tags-bg-kuuga-3840.jpg") 58% 34% / cover no-repeat;
   background-attachment: fixed;
 }
 
