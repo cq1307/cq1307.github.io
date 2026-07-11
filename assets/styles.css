@@ -2909,7 +2909,19 @@ body[data-page="categories"] .site-header.compact,
 body[data-page="tags"] .site-header.compact,
 body[data-page="links"] .site-header.compact,
 body[data-page="about"] .site-header.compact {
-  min-height: clamp(520px, 68svh, 680px);
+  min-height: clamp(620px, 82svh, 900px);
+}
+
+body[data-page="post"] .site-header.compact {
+  min-height: clamp(620px, 82svh, 900px);
+}
+
+body[data-page="post"] .post-hero {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(72px, 9svh, 110px);
+  transform: translateX(-50%);
+  padding: 0;
 }
 
 body[data-page="links"]::before {
