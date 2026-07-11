@@ -2855,9 +2855,13 @@ body[data-page="post"] .toc::-webkit-scrollbar-thumb {
   background: rgba(238, 248, 255, 0.2);
 }
 
-body[data-page="categories"]::before,
-body[data-page="post"]::before {
+body[data-page="categories"]::before {
   background: url("category-post-bg.png") center 44% / cover no-repeat;
+  background-attachment: fixed;
+}
+
+body[data-page="post"]::before {
+  background: url("post-bg-kuuga-579.jpg") center 52% / cover no-repeat;
   background-attachment: fixed;
 }
 
@@ -3185,6 +3189,10 @@ body[data-page="about"] .profile .profile-lead {
 
   body[data-page="tags"]::before {
     background-position: 61% 28%;
+  }
+
+  body[data-page="post"]::before {
+    background-position: 50% center;
   }
 }
 
