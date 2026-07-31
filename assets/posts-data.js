@@ -1,5 +1,15 @@
 window.BLOG_POSTS = [
   {
+    "title": "初识ZIP文件结构",
+    "url": "post-zip.html",
+    "date": "2026-07-26",
+    "categories": [
+      "CTF"
+    ],
+    "tags": [],
+    "summary": "参考： https://goodapple.top/archives/700 （很棒的基础教学博客） zip文件又三个部分组成： 压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志 背景：创建两个zip文件 一个..."
+  },
+  {
     "title": "初识PE文件结构",
     "url": "post-20260709-pe-file-structure.html",
     "date": "2026-07-09",

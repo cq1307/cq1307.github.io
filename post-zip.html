@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>初识ZIP文件结构 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260711-inner-spacing">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">CTF</p>
+      <h1>初识ZIP文件结构</h1>
+      <p>2026-07-26 &middot; 参考： https://goodapple.top/archives/700 （很棒的基础教学博客） zip文件又三个部分组成： 压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志 背景：创建两个zip文件 一个...</p>
+    </section>
+  </header>
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<p>参考：<a href="https://goodapple.top/archives/700" target="_blank" rel="noreferrer">https://goodapple.top/archives/700</a>（很棒的基础教学博客）<br></p><p>zip文件又三个部分组成：<br></p><p>压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志<br></p><p>背景：创建两个zip文件 一个无密码 一个有密码 压缩包内都有flag.txt <br></p><p><figure class="yuque-image"><img src="assets/images/posts/zip/image-01.png" alt="" loading="lazy"></figure><br></p><h1 id="Dw5W6">无密码zip：<br></h1><p><figure class="yuque-image"><img src="assets/images/posts/zip/image-02.png" alt="图片-56.png" loading="lazy"></figure><br></p><p><br></p><p>数据储存区（蓝色）：<br></p><p>数据存储区包含一个或多个文件实体。文件实体通常以标识50 4B 03 04开头（类似PE指纹，是判断zip的标志）压缩包内每一个被压缩的文件都会对应一个文件实体。比如我们压缩的文件flag.txt对应着上图的一个文件实体，其中我们能够直观地看出被压缩文件的文件名flag.txt、文件内容flag{abcdefg}、是否被加密等信息。<br></p><p><br></p><p>中心目录区（紫色）：<br></p><p>记录文件注释、大小、文件名等等。包含所有被压缩文件的文件头 ，通常50 4b 01 02标识开头<br></p><p><br></p><p>目录结束标识（黄色）：<br></p><p>以  50 4B 05 06 开头。记录了压缩包内文件数目，以及文件在中央目录中的位置<br></p><p>记录了目录列表相当于文件开头的偏移量、以及压缩包的相关信息（如注释内容的长度）<br></p><h2 id="zvAEM">
+ZIP伪加密（ctfshow例题）<br></h2><p>winhex打开zip文件<br></p><p><figure class="yuque-image"><img src="assets/images/posts/zip/image-03.png" alt="image.png" loading="lazy"></figure><br></p><p>压缩源文件数据区：<br></p><p>50 4B 03 04：这是头文件标记（0x04034b50）
+14 00：解压文件所需 pkware 版本
+00 00：全局方式位标记（有无加密） 头文件标记后2bytes<br></p><p><br></p><p>压缩源文件目录区：<br></p><p>50 4B 01 02：目录中文件文件头标记<br></p><p>1F 00：压缩使用的pkware版本<br></p><p>14 00：解压文件所需pkware版本<br></p><p>90 00：全局方式位标记（有无加密，伪加密的关键） 目录文件标记后4bytes<br></p><p><br></p><p>判断：<br></p><p>1.无加密：<br></p><p>压缩源文件数据区的全局加密应当为00 00 （504B0304两个bytes之后）
+且压缩源文件目录区的全局方式位标记应当为00 00（504B0304四个bytes之后）<br></p><p>2.伪加密：<br></p><p>压缩源文件数据区的全局加密应当为00 00
+且压缩源文件目录区的全局方式位标记应当为09 00<br></p><p>3.真加密：<br></p><p>压缩源文件数据区的全局加密应当为09 00
+且压缩源文件目录区的全局方式位标记应当为09 00 !<br></p><p>判断得文件是伪加密 把90 00改成 00 00即可<br></p>
+    </article>
+    <aside class="toc"><p>&#30446;&#24405;</p><nav data-toc></nav></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
+  <div class="search-modal" data-search-modal hidden><div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div><label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label><div class="search-results" data-search-results></div></div></div>
+  <script src="assets/posts-data.js?v=yuque-20260731174716"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
+</body>
+</html>
