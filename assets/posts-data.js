@@ -12,6 +12,19 @@ window.BLOG_POSTS = [
     "summary": "从 Android Studio 安装、SDK 配置到模拟器与首个项目运行的开发环境搭建记录。"
   },
   {
+    "title": "Android_APK目录结构",
+    "url": "post-android-apk.html",
+    "date": "2026-08-15",
+    "categories": [
+      "Android"
+    ],
+    "tags": [
+      "Android入门",
+      "APK"
+    ],
+    "summary": "梳理 Android Studio 的 Project/Android 两种视图，逐层说明 app、src、res、Manifest 与 Gradle 等核心目录及文件作用。"
+  },
+  {
     "title": "初识ZIP文件结构",
     "url": "post-zip.html",
     "date": "2026-07-26",

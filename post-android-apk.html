@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>Android_APK目录结构 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260711-inner-spacing">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Android</p>
+      <h1>Android_APK目录结构</h1>
+      <p>2026-08-15 &middot; 梳理 Android Studio 的 Project/Android 两种视图，逐层说明 app、src、res、Manifest 与 Gradle 等核心目录及文件作用。</p>
+    </section>
+  </header>
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<p>Android studio提供两种视图方式<br></p><p>项目视图、安卓视图<br></p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-01.png" alt="image.png" loading="lazy"></figure><br></p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-02.png" alt="image.png" loading="lazy"></figure><br></p><p>project是设备中真实的项目结构              Android是更加清晰的内容展示<br></p><p>Android视图<br></p><p><br></p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-03.png" alt="image.png" loading="lazy"></figure><br></p><p><br></p><p>Project视图、<br></p><pre><code>Android 项目目录结构
+│
+├─ .gradle/                         # Gradle 自动生成的缓存目录，一般不用手动修改
+├─ .idea/                           # Android Studio 的项目配置目录，一般不用手动修改
+│
+├─ app/                             # app 模块，Android 开发最主要的工作目录
+│  │
+│  ├─ build/                        # 编译生成的文件，可删除，重新编译后会自动生成
+│  │
+│  ├─ libs/                         # 本地依赖库，例如 .jar / .aar 文件
+│  │
+│  ├─ src/                          # 源代码目录，非常重要
+│  │  │
+│  │  ├─ main/                     # APP 主程序代码
+│  │  │  │
+│  │  │  ├─ java/                  # Java / Kotlin 源代码
+│  │  │  │  └─ com.example.xxx/
+│  │  │  │     └─ MainActivity.java
+│  │  │  │
+│  │  │  ├─ res/                   # Android 资源目录
+│  │  │  │  │
+│  │  │  │  ├─ drawable/           # 图片、Shape、Vector Drawable 等资源
+│  │  │  │  │
+│  │  │  │  ├─ layout/             # XML 页面布局文件
+│  │  │  │  │  └─ activity_main.xml
+│  │  │  │  │
+│  │  │  │  ├─ mipmap-mdpi/        # mdpi 启动器图标
+│  │  │  │  ├─ mipmap-hdpi/        # hdpi 启动器图标
+│  │  │  │  ├─ mipmap-xhdpi/       # xhdpi 启动器图标
+│  │  │  │  ├─ mipmap-xxhdpi/      # xxhdpi 启动器图标
+│  │  │  │  ├─ mipmap-xxxhdpi/     # xxxhdpi 启动器图标
+│  │  │  │  ├─ mipmap-anydpi-v26/  # 自适应启动器图标
+│  │  │  │  │
+│  │  │  │  ├─ values/             # 字符串、颜色、主题等配置
+│  │  │  │  │  ├─ strings.xml
+│  │  │  │  │  ├─ colors.xml
+│  │  │  │  │  └─ themes.xml
+│  │  │  │  │
+│  │  │  │  └─ xml/                # 其他 XML 配置文件
+│  │  │  │
+│  │  │  └─ AndroidManifest.xml    # APP 清单配置文件
+│  │  │                            # 配置组件、权限、应用信息等
+│  │  │
+│  │  ├─ androidTest/              # Android 设备/模拟器测试代码
+│  │  └─ test/                     # 本地单元测试代码
+│  │
+│  ├─ .gitignore                   # app 模块 Git 忽略配置
+│  ├─ build.gradle.kts             # app 模块的 Gradle 构建配置，非常重要
+│  └─ proguard-rules.pro           # R8 / 代码压缩混淆相关规则
+│
+├─ gradle/
+│  └─ wrapper/
+│     ├─ gradle-wrapper.jar
+│     └─ gradle-wrapper.properties # Gradle Wrapper 版本配置
+│
+├─ .gitignore                      # 整个项目的 Git 忽略配置
+├─ build.gradle.kts                # 项目级 Gradle 构建配置
+├─ settings.gradle.kts             # 项目与模块配置
+├─ gradle.properties               # Gradle 全局项目配置
+├─ gradlew                         # Linux / macOS Gradle Wrapper
+├─ gradlew.bat                     # Windows Gradle Wrapper
+└─ local.properties                # 本机环境配置，例如 Android SDK 路径</code></pre><p><br></p>
+    </article>
+    <aside class="toc"><p>&#30446;&#24405;</p><nav data-toc></nav></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
+  <div class="search-modal" data-search-modal hidden><div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div><label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label><div class="search-results" data-search-results></div></div></div>
+  <script src="assets/posts-data.js?v=yuque-20260815013305"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
+</body>
+</html>
