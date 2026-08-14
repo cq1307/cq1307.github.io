@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>Android开发环境搭建 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260711-inner-spacing">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Android</p>
+      <h1>Android开发环境搭建</h1>
+      <p>2026-08-15 &middot; 从 Android Studio 安装、SDK 配置到模拟器与首个项目运行的开发环境搭建记录。</p>
+    </section>
+  </header>
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<h1 id="iQXUE">开发环境配置<br></h1><p>1.开发工具：<br></p><p>Android Studio<br></p><p><a href="https://developer.android.com/studio?hl=zh-cn" target="_blank" rel="noreferrer">https://developer.android.com/studio?hl=zh-cn</a><br></p><p>官网提供了一些使用教程 自己查询即可<br></p><p>2.了解开发基础：   <br></p><p>构建工具----&gt;java需要编译，java写的安卓程序也需要被编译成----&gt;apk<br></p><p>       -java：Maven构建 --&gt; javaEE项目用的居多<br></p><p>       -安卓：官方推荐使用gradle构建安卓项目<br></p><p>#gradle和maven都是java项目的构建工具，但他们有一些区别：<br></p><p>1.语法:Gradle使用Groovy语言进行编写，而Maven使用XML格式做的.<br></p><p>   Groovy更加灵活易读，XML更加严谨易于重用<br></p><p>2.性能:Gradle比Maven更加高效快速，因为它使用了增量构建模式，只会重新构建被更改的模块，而Maven则需要重新构建整个项目<br></p><p>3.插件:Gradle的插件生态更加丰富和现代化，而Maven的件相对较为传统，此外，Gradle的插件可以非常容易地编写和定制，而Maven的描件相对繁琐。<br></p><p>4.维护:Maven有比较成熟的工具链和文档支持，而Gradle则相对较新，可能需要更多的自学<br></p><p>后续我们使用的就是gradle <br></p><p># Groovy介绍[了解]<br></p><p>Groovy是一种基于JVM (Java虚拟机)的敏捷开发语言，它结合了Python,Ruby和Smalltalk的许多强大的特性，Groovy 代码能够与Java代码很好地结合，也能用于扩展现有代码<br></p><p>3.SDK配置及环境变量问题<br></p><p>在安装完Android Studio后 大概率会因为SDK的下载配置问题报错<br></p><p>两个解决方法 ：<br></p><p>Android SDK换源   or“健康”上网方式在Android Studio配置中下载<br></p><p>更倾向于换源（但是我目前没有换，问就是懒，换源可以省下很多麻烦事）<br></p><p>SDK下载后 <br></p><p>#虚拟机文件<br></p><p><br></p><p>#移动接口<br></p><p><br></p><p>对这两个文件路径保存环境变量 挨着即可<br></p><h1 id="zzcdG">调试环境<br></h1><p>进入Android studio后新建项目 （目前只学了java）<br></p><p>选择Empty Views Activity（纯java开发）<br></p><p>进入开发界面会自动生成这个界面（先不管代码内容）<br></p><p>每次新建项目会重新下载Gradle（没换源记得出网创建）<br></p><p><br></p><h2 id="pgfGX">调试项目<br></h2><p>1.虚拟机调试<br></p><p>点击Android studio中的Devices Manager(版本不同位置不同)<br></p><p>新建虚拟机设备，自行了解适合自己的设备即可、<br></p><p><br></p><p><br></p><p>2.实机调试（推荐，实体机无需root）<br></p><p>使用实机打开开发者模式，打开USB调试，接入设备<br></p><p>使用之前环境配置的adb识别设备<br></p><p><br></p><p>安装scrcpy<br></p><p>输入<br></p><p>而实机也可以在Android studio中参与运行调试<br></p>
+    </article>
+    <aside class="toc"><p>&#30446;&#24405;</p><nav data-toc></nav></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
+  <div class="search-modal" data-search-modal hidden><div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div><label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label><div class="search-results" data-search-results></div></div></div>
+  <script src="assets/posts-data.js?v=yuque-20260815005248"></script>
+  <script src="assets/app.js?v=20260708-book-toc"></script>
+</body>
+</html>

@@ -1,5 +1,17 @@
 window.BLOG_POSTS = [
   {
+    "title": "Android开发环境搭建",
+    "url": "post-android.html",
+    "date": "2026-08-15",
+    "categories": [
+      "Android"
+    ],
+    "tags": [
+      "Android入门"
+    ],
+    "summary": "从 Android Studio 安装、SDK 配置到模拟器与首个项目运行的开发环境搭建记录。"
+  },
+  {
     "title": "初识ZIP文件结构",
     "url": "post-zip.html",
     "date": "2026-07-26",
