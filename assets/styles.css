@@ -3304,3 +3304,18 @@ body[data-page="about"] .profile .profile-lead {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+body[data-page="post"] .article-body {
+  font-size: 1.08rem;
+}
+
+body[data-page="post"] .article-body p,
+body[data-page="post"] .article-body li {
+  font-size: clamp(1.06rem, 1.25vw, 1.18rem);
+  line-height: 1.9;
+}
+
+body[data-page="post"] .article-body pre {
+  font-size: 1rem;
+  line-height: 1.65;
+}
