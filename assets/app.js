@@ -288,8 +288,82 @@
 
   const toc = document.querySelector("[data-toc]");
   const article = document.querySelector("[data-article]");
+
+  function enhanceArticleStructure(container) {
+    if (!container) return;
+
+    const makeHeadingId = (text, index) => {
+      const base = slug(text).slice(0, 54);
+      return `${base || "section"}-${index + 1}`;
+    };
+
+    Array.from(container.querySelectorAll("p")).forEach((paragraph) => {
+      const figures = Array.from(paragraph.children).filter((child) => child.tagName === "FIGURE");
+      const text = paragraph.textContent.replace(/\u00a0/g, " ").trim();
+
+      if (figures.length && !text) {
+        figures.forEach((figure) => paragraph.before(figure));
+        paragraph.remove();
+        return;
+      }
+
+      paragraph.querySelectorAll("br:last-child").forEach((lineBreak) => lineBreak.remove());
+      const normalized = paragraph.textContent.replace(/\u00a0/g, " ").trim();
+      if (!normalized && !paragraph.querySelector("img, video, iframe")) {
+        paragraph.remove();
+        return;
+      }
+
+    });
+
+    Array.from(container.querySelectorAll("p")).forEach((paragraph) => {
+      const normalized = paragraph.textContent.replace(/\u00a0/g, " ").trim();
+      const hashHeading = normalized.match(/^#{1,4}\s*(.+)$/);
+      if (hashHeading && hashHeading[1].length <= 42) {
+        const heading = document.createElement("h3");
+        heading.textContent = hashHeading[1].trim();
+        paragraph.replaceWith(heading);
+        return;
+      }
+
+      if (/^(?:注意|提示|说明|结论|总结|背景)[：:]/.test(normalized)) {
+        paragraph.classList.add("article-callout");
+        return;
+      }
+
+      const isShortLabel = normalized.length >= 4
+        && normalized.length <= 30
+        && /[：:]$/.test(normalized)
+        && !/[，。；,;]/.test(normalized.slice(0, -1));
+      const isNumberedStep = normalized.length <= 30
+        && /^\d+[.、]\s*\S/.test(normalized)
+        && !/[。；;]$/.test(normalized);
+      const nextTag = paragraph.nextElementSibling?.tagName;
+      const introducesMedia = normalized.length >= 2
+        && normalized.length <= 20
+        && ["FIGURE", "PRE", "TABLE"].includes(nextTag);
+
+      if (isShortLabel || isNumberedStep || introducesMedia) {
+        const heading = document.createElement("h3");
+        heading.textContent = normalized.replace(/[：:、]$/, "");
+        paragraph.replaceWith(heading);
+      }
+    });
+
+    Array.from(container.querySelectorAll("h1, h2, h3, h4")).forEach((heading, index) => {
+      heading.textContent = heading.textContent.trim();
+      if (!heading.id) heading.id = makeHeadingId(heading.textContent, index);
+    });
+
+    container.querySelectorAll("figure").forEach((figure) => {
+      figure.classList.add("article-media");
+    });
+  }
+
+  enhanceArticleStructure(article);
+
   if (toc && article) {
-    const headings = Array.from(article.querySelectorAll("h1[id], h2[id], h3[id]"));
+    const headings = Array.from(article.querySelectorAll("h1[id], h2[id], h3[id], h4[id]"));
     toc.innerHTML = headings.map((heading) => (
       `<a class="toc-link toc-level-${heading.tagName.slice(1)}" href="#${heading.id}">${escapeHtml(heading.textContent)}</a>`
     )).join("");
