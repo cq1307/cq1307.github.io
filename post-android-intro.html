@@ -30,11 +30,55 @@
     </section>
   </header>
   <main class="article-layout">
-    <article class="article-body" data-article>
+    <article class="article-body" data-article data-structure="manual">
 <h1 id="part-environment">一、Android 开发环境搭建</h1>
-<h2 id="iQXUE">开发环境配置</h2><p>1.开发工具：</p><p>Android Studio</p><p><a href="https://developer.android.com/studio?hl=zh-cn" target="_blank" rel="noreferrer">https://developer.android.com/studio?hl=zh-cn</a></p><p>官网提供了一些使用教程 自己查询即可</p><p>2.了解开发基础：   </p><p>构建工具----&gt;java需要编译，java写的安卓程序也需要被编译成----&gt;apk</p><p>       -java：Maven构建 --&gt; javaEE项目用的居多</p><p>       -安卓：官方推荐使用gradle构建安卓项目</p><p>#gradle和maven都是java项目的构建工具，但他们有一些区别：</p><p>1.语法:Gradle使用Groovy语言进行编写，而Maven使用XML格式做的.</p><p>   Groovy更加灵活易读，XML更加严谨易于重用</p><p>2.性能:Gradle比Maven更加高效快速，因为它使用了增量构建模式，只会重新构建被更改的模块，而Maven则需要重新构建整个项目</p><p>3.插件:Gradle的插件生态更加丰富和现代化，而Maven的件相对较为传统，此外，Gradle的插件可以非常容易地编写和定制，而Maven的描件相对繁琐。</p><p>4.维护:Maven有比较成熟的工具链和文档支持，而Gradle则相对较新，可能需要更多的自学</p><p>后续我们使用的就是gradle </p><p># Groovy介绍[了解]</p><p>Groovy是一种基于JVM (Java虚拟机)的敏捷开发语言，它结合了Python,Ruby和Smalltalk的许多强大的特性，Groovy 代码能够与Java代码很好地结合，也能用于扩展现有代码</p><p>3.SDK配置及环境变量问题</p><p>在安装完Android Studio后 大概率会因为SDK的下载配置问题报错</p><p>两个解决方法 ：</p><p>Android SDK换源   or“健康”上网方式在Android Studio配置中下载</p><p>更倾向于换源（但是我目前没有换，问就是懒，换源可以省下很多麻烦事）</p><p>SDK下载后 </p><p>#虚拟机文件</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-01.png" alt="image.png" loading="lazy"></figure></p><p>#移动接口</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-02.png" alt="image.png" loading="lazy"></figure></p><p>对这两个文件路径保存环境变量 挨着即可</p><h2 id="zzcdG">调试环境</h2><p>进入Android studio后新建项目 （目前只学了java）</p><p>选择Empty Views Activity（纯java开发）</p><p>进入开发界面会自动生成这个界面（先不管代码内容）</p><p>每次新建项目会重新下载Gradle（没换源记得出网创建）</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-03.png" alt="image.png" loading="lazy"></figure></p><h3 id="pgfGX">调试项目</h3><p>1.虚拟机调试</p><p>点击Android studio中的Devices Manager(版本不同位置不同)</p><p>新建虚拟机设备，自行了解适合自己的设备即可、</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-04.png" alt="image.png" loading="lazy"></figure></p><p>2.实机调试（推荐，实体机无需root）</p><p>使用实机打开开发者模式，打开USB调试，接入设备</p><p>使用之前环境配置的adb识别设备</p><pre><code>adb devices</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android/image-05.png" alt="image.png" loading="lazy"></figure></p><p>安装scrcpy</p><pre><code>winget install --exact Genymobile.scrcpy</code></pre><p>输入</p><pre><code>scrcpy</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android/image-06.png" alt="image.png" loading="lazy"></figure>而实机也可以在Android studio中参与运行调试</p>
+<h2 id="environment-basics">安装工具与构建基础</h2>
+<h3 id="android-studio">Android Studio</h3>
+<p>开发工具使用 Android Studio，可以从<a href="https://developer.android.com/studio?hl=zh-cn" target="_blank" rel="noreferrer">官方网站</a>下载。官网同时提供安装和基础使用教程。</p>
+<h3 id="gradle-basics">Gradle、Maven 与 Groovy</h3>
+<p>Java 源码需要经过编译，Android 项目也需要经过构建才能生成 APK。普通 Java 项目经常使用 Maven，而 Android 官方项目主要使用 Gradle。</p>
+<p>两者的核心差异可以简单理解为：</p>
+<ul>
+  <li><strong>配置方式：</strong>Maven 使用 XML 编写 POM；Gradle 可以使用 Groovy DSL 或 Kotlin DSL。</li>
+  <li><strong>构建方式：</strong>Gradle 支持增量构建和构建缓存，适合模块较多的 Android 工程。</li>
+  <li><strong>扩展能力：</strong>Gradle 的插件体系更灵活，Android Gradle Plugin 也是 Android Studio 构建项目的核心。</li>
+</ul>
+<p>Groovy 是运行在 JVM 上的动态语言，可以直接调用 Java 类。这里暂时只需要知道：旧版 Android 项目中的 <code>build.gradle</code> 常用 Groovy DSL 编写。</p>
+<h3 id="sdk-environment">配置 SDK 与环境变量</h3>
+<p>Android Studio 安装完成后，如果 SDK 下载失败，可以为 Android SDK 配置镜像源，或者在网络能够正常访问官方服务时直接通过 Android Studio 下载。</p>
+<p>SDK 安装完成后，需要确认下面两个位置：</p>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-01.png" alt="Android SDK 与虚拟设备文件位置" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-02.png" alt="Android SDK platform-tools 目录" loading="lazy"></figure>
+<p>将 SDK 路径和包含 <code>adb</code> 的 <code>platform-tools</code> 路径加入环境变量，方便在终端中直接调用 Android 调试工具。</p>
+<h2 id="create-debug-project">创建并调试项目</h2>
+<p>在 Android Studio 中新建项目，选择 <strong>Empty Views Activity</strong>。本文使用 Java 和传统 XML View，因此先不选择 Compose 模板。</p>
+<p>项目第一次打开时会下载 Gradle 和相关依赖。如果没有配置镜像源，需要保证网络可以访问对应仓库。</p>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-03.png" alt="Android Studio 新建项目后的界面" loading="lazy"></figure>
+<h3 id="emulator-debug">使用模拟器调试</h3>
+<p>打开 Android Studio 的 <strong>Device Manager</strong>，创建一个适合当前项目 API 版本的虚拟设备，然后启动模拟器运行应用。</p>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-04.png" alt="Android Studio 虚拟设备管理器" loading="lazy"></figure>
+<h3 id="device-debug">使用实体机调试</h3>
+<p>实体机无需 Root。打开开发者模式和 USB 调试后连接电脑，先确认 ADB 已经识别设备：</p>
+<pre><code>adb devices</code></pre>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-05.png" alt="ADB 识别实体设备" loading="lazy"></figure>
+<p>需要在电脑上镜像和控制手机屏幕时，可以安装并运行 scrcpy：</p>
+<pre><code>winget install --exact Genymobile.scrcpy</code></pre>
+<pre><code>scrcpy</code></pre>
+<figure class="yuque-image"><img src="assets/images/posts/android/image-06.png" alt="scrcpy 实机投屏效果" loading="lazy"></figure>
+<p>设备连接成功后，也可以直接在 Android Studio 中选择实体机进行运行和调试。</p>
 <h1 id="part-structure">二、Android APK 目录结构</h1>
-<p>Android studio提供两种视图方式</p><p>项目视图、安卓视图</p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-01.png" alt="image.png" loading="lazy"></figure></p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-02.png" alt="image.png" loading="lazy"></figure></p><p>project是设备中真实的项目结构              Android是更加清晰的内容展示</p><p>Android视图</p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-03.png" alt="image.png" loading="lazy"></figure></p><p>Project视图、</p><pre><code>Android 项目目录结构
+<h2 id="project-views">Project 与 Android 视图</h2>
+<p>Android Studio 提供两种常用的项目视图：</p>
+<ul>
+  <li><strong>Project 视图：</strong>按照磁盘上的真实目录结构展示文件，适合查找构建脚本和完整路径。</li>
+  <li><strong>Android 视图：</strong>按照 Android 开发用途重新归类文件，日常编写代码和资源时更直观。</li>
+</ul>
+<figure class="yuque-image"><img src="assets/images/posts/android-apk/image-01.png" alt="Android Studio Project 视图" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android-apk/image-02.png" alt="Android Studio Android 视图" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android-apk/image-03.png" alt="Android 视图中的项目目录" loading="lazy"></figure>
+<h2 id="project-directory">Project 目录速查</h2>
+<p>下面按真实目录结构列出一个常见 Android 项目的主要文件。实际项目会因为 Android Studio 和 Gradle 版本不同而略有差异。</p>
+<pre><code>Android 项目目录结构
 │
 ├─ .gradle/                         # Gradle 自动生成的缓存目录，一般不用手动修改
 ├─ .idea/                           # Android Studio 的项目配置目录，一般不用手动修改
@@ -97,7 +141,26 @@
 ├─ gradlew.bat                     # Windows Gradle Wrapper
 └─ local.properties                # 本机环境配置，例如 Android SDK 路径</code></pre>
 <h1 id="part-first-app">三、自己的第一个 Android App</h1>
-<h2 id="KwK1N">安卓开发流程预览</h2><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-01.png" alt="image.png" loading="lazy"></figure></p><p>简单概括一下流程：</p><p>1.用户打开app 进入首页（xml写的页面布局）</p><p>2.点开网页内容， Java/Kotlin 代码通过 HTTP/HTTPS 请求访问服务器提供的 API 接口。  </p><p>3.请求通过后端接收（用逻辑代码）再从数据库调用数据</p><p>4.后端返回的数据通过java数据加工返回页面</p><p>而逆向思路就很简单</p><p>apk----&gt;java/kotlin   </p><h2 id="g0qYO">第一个APP</h2><h3 id="HPFwW">1.编写主页面（xml）</h3><p>使用Android视图找res文件下的layout，其中的activity_main.xml就是主页面xml</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-02.png" alt="image.png" loading="lazy"></figure></p><p>xml编辑有code（纯代码）、split（边写边看）、design（图示化快捷开发）三种视图</p><p>#版本不同按钮位置不同</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-03.png" alt="image.png" loading="lazy"></figure></p><p>现在正式开始我们的第一款app开发！ </p><p>思来想去 整个图片选择器吧                            </p><p>                                                                           demo👇</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-04.png" alt="image.png" loading="lazy"></figure></p><p>首先使用LinearLayout把页面框架搭好</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<h2 id="android-flow">先看懂应用运行流程</h2>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-01.png" alt="Android 应用与后端交互流程" loading="lazy"></figure>
+<p>一个需要访问后端的 Android 应用，大致会经历下面几个步骤：</p>
+<ol>
+  <li>用户打开 App，首先看到由 XML 描述的页面布局。</li>
+  <li>用户触发操作后，Java 或 Kotlin 代码通过 HTTP/HTTPS 请求服务端 API。</li>
+  <li>后端处理业务逻辑，并在需要时读取数据库中的数据。</li>
+  <li>后端返回结果，客户端代码解析数据并更新界面。</li>
+</ol>
+<p>从逆向角度看，APK 中的 XML 资源、Java/Kotlin 逻辑和网络接口，正是分析应用行为的重要入口。</p>
+<h2 id="image-switcher-app">制作图片切换应用</h2>
+<p>这一节做一个简单的图片切换器：页面中显示一张图片，点击按钮后切换到下一张。</p>
+<h3 id="build-layout">编写 XML 页面布局</h3>
+<p>在 Android 视图中打开 <code>res/layout/activity_main.xml</code>。XML 编辑器通常提供 <strong>Code</strong>、<strong>Split</strong> 和 <strong>Design</strong> 三种视图，不同版本的按钮位置可能略有差异。</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-02.png" alt="activity_main.xml 文件位置" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-03.png" alt="XML 布局编辑器视图切换" loading="lazy"></figure>
+<p>先看一下最终要实现的效果：</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-04.png" alt="图片切换应用演示" loading="lazy"></figure>
+<p>首先用纵向的 <code>LinearLayout</code> 搭建页面根布局：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;LinearLayout
     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -109,7 +172,9 @@
     android:orientation=&quot;vertical&quot;
     tools:context=&quot;.MainActivity&quot;&gt;
 
-&lt;/LinearLayout&gt;</code></pre><p>开始页面的整体布局 我们需要一个图片的预标签和按钮标签</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<p>接着加入一个用于预览图片的 <code>ImageView</code> 和一个用于切换图片的 <code>Button</code>：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;LinearLayout
     xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -147,7 +212,14 @@
         &lt;/Button&gt;
     &lt;/LinearLayout&gt;
 
-&lt;/LinearLayout&gt;</code></pre><p>目前的效果：页面结构就这样草率完成了（体验体验即可）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-05.png" alt="image.png" loading="lazy"></figure></p><h3 id="p6WYo">2.java逻辑编写</h3><p>先明确需要的效果，图片框中有图片 点击切换按钮即可切换图片的动态效果</p><p>1.首先需要图片资源</p><p>图片资源都存放在res文件下的drawable中（对预选图片复制，点击drawable后粘贴）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-06.png" alt="image.png" loading="lazy"></figure></p><p>回到MainActivity开写java</p><p>1.基础框架</p><pre><code>package com.example.test_1;
+&lt;/LinearLayout&gt;</code></pre>
+<p>完成后的页面结构如下：</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-05.png" alt="图片切换应用的页面布局" loading="lazy"></figure>
+<h3 id="write-java-logic">编写 Java 交互逻辑</h3>
+<p>先把准备好的图片复制到 <code>res/drawable</code> 目录。然后回到 <code>MainActivity.java</code>，按照“绑定布局、找到控件、监听点击、切换资源”的顺序编写逻辑。</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-06.png" alt="drawable 图片资源目录" loading="lazy"></figure>
+<p><strong>第一步：绑定页面布局。</strong></p>
+<pre><code>package com.example.test_1;
 
 import android.os.Bundle;
 
@@ -168,7 +240,9 @@ public class MainActivity extends AppCompatActivity {
         //让java和对应的xml页面对应上 （绑定关系）
 
         }
-    }</code></pre><p>2.实现按钮操作（点击）</p><pre><code>package com.example.test_1;
+    }</code></pre>
+<p><strong>第二步：找到按钮并监听点击事件。</strong></p>
+<pre><code>package com.example.test_1;
 
 import android.os.Bundle;
 import android.view.View;
@@ -210,7 +284,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         }
-    }</code></pre><p>3.图片资源展示</p><pre><code>package com.example.test_1;
+    }</code></pre>
+<p><strong>第三步：找到 ImageView 并显示本地图片资源。</strong></p>
+<pre><code>package com.example.test_1;
 
 import android.os.Bundle;
 import android.view.View;
@@ -259,7 +335,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         }
-    }</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-07.png" alt="image.png" loading="lazy"></figure></p><p>现在图片资源已经显示出来了 继续点击按钮实现切换效果</p><p>我这里先把btn和img重新声明一遍，并且给图片赋值给idimg<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-08.png" alt="image.png" loading="lazy"></figure></p><p>顺手把下面的图片调用也改掉</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-09.png" alt="image.png" loading="lazy"></figure></p><p>那么改掉idimg的值就可以实现图片切换的效果了</p><p>而图片切换是在按钮效果下实现......所以</p><pre><code>Toast.makeText(MainActivity.this,&quot;换下一张&quot;,Toast.LENGTH_LONG).show();
+    }</code></pre>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-07.png" alt="本地图片显示效果" loading="lazy"></figure>
+<p>为了在每次点击时切换图片，把按钮和图片控件提到成员变量中，并用 <code>idimg</code> 保存当前图片的资源 ID：</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-08.png" alt="声明按钮、图片控件和资源 ID" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-09.png" alt="使用资源 ID 显示图片" loading="lazy"></figure>
+<p>最后在按钮的点击事件中更新 <code>idimg</code>，再调用 <code>setImageResource</code> 刷新图片：</p>
+<pre><code>Toast.makeText(MainActivity.this,&quot;换下一张&quot;,Toast.LENGTH_LONG).show();
 //Toast是 Android 提供的一个类 专门用来做这种短暂提示
 //.makeText(...) 创建一个文字 Toast
 //Toast.makeText(
@@ -273,15 +355,30 @@ if (idimg == R.drawable.sticker_01){
 }else{
     idimg = R.drawable.sticker_01;
 }
-img.setImageResource(idimg);</code></pre><p>即可实现按钮图片的切换</p><p>4.将本地图片资源换为网络图片资源</p><p># 安卓要做网络资源加载，必须开启一个新的线程做，主线程只负责更新ui  -否则 主线程会卡死--&gt;直到网络请求回来---&gt;用户体验不好  -安卓强制必须开启线程加载，如果不开启，直接报错 </p><p># 1 手机能上网 </p><p># 2 代理关掉，其实也可以不关，因为咱开着抓包工具了，如果没开着，就需要关掉才能上网，正常做开发的时候默认就是关掉的</p><p># 3 AndroidManifest.xml配置上网权限，如下：</p><pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+img.setImageResource(idimg);</code></pre>
+<p>到这里，本地图片切换功能已经完成。</p>
+<h3 id="load-network-image">加载网络图片</h3>
+<p>网络请求不能直接放在主线程中执行，否则会阻塞界面，Android 也会抛出异常。加载网络图片前先确认：</p>
+<ol>
+  <li>手机或模拟器可以正常联网。</li>
+  <li>代理配置与当前调试环境一致，避免请求被错误代理。</li>
+  <li>在 <code>AndroidManifest.xml</code> 中声明网络权限。</li>
+</ol>
+<pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
 xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
 &lt;application
 ...
 &lt;/application&gt;
 ...
 &lt;!--加上下面这句话就是给你的app申请手机的上网权限 --&gt;
-&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;
-&lt;/manifest&gt;</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-10.png" alt="image.png" loading="lazy"></figure></p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-11.png" alt="image.png" loading="lazy"></figure></p><p>(进程2改为线程)</p><p>图片资源案例</p><p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10" target="_blank" rel="noreferrer">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10</a></p><p>首先需要声明几个属性来接收图片网址，再去声明几个属性接收请求回来的图片资源数据（想让图片显示必须放上图片资源id）</p><pre><code>private ImageView img;
+&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;/manifest&gt;</code></pre>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-10.png" alt="在 AndroidManifest 中添加网络权限" loading="lazy"></figure>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-11.png" alt="使用线程加载网络图片" loading="lazy"></figure>
+<p>示例图片地址：</p>
+<p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10" target="_blank" rel="noreferrer">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10</a></p>
+<p>先声明控件、当前资源 ID、URL 和 Bitmap。下面是最初的尝试，代码会因为 <code>new URL(...)</code> 可能抛出异常而无法直接通过编译：</p>
+<pre><code>private ImageView img;
     private Button btn;
     private  int idimg = R.drawable.sticker_01;
     private URL url = null; //创建url对象 = 空
@@ -312,7 +409,9 @@ xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
         });
 
     }
-}</code></pre><p>看似没问题但报错了，这是也许访问的url可能会访问出错，所以需要使用测试函数try来运行，以防整个进程嘎掉</p><pre><code> public void onClick(View v) {
+}</code></pre>
+<p>因此需要使用 <code>try/catch</code> 处理 URL 格式或访问准备阶段的异常：</p>
+<pre><code> public void onClick(View v) {
                 //按钮真正被点击以后，会执行的方法。
                 Toast.makeText(MainActivity.this,&quot;换个网络图片&quot;,Toast.LENGTH_LONG).show();
                 //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10
@@ -322,7 +421,9 @@ xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
                 }catch (Exception e){
                     Toast.makeText(MainActivity.this,&quot;无法访问url&quot;,Toast.LENGTH_LONG).show();//按钮报错弹窗
 
-                }</code></pre><p>完整的调用网络url图片MainActivity如下</p><pre><code> private ImageView img;
+                }</code></pre>
+<p>完整实现中，工作线程负责下载图片，下载完成后再通过 <code>runOnUiThread</code> 回到主线程更新 <code>ImageView</code>：</p>
+<pre><code> private ImageView img;
     private Button btn;
     private  int idimg = R.drawable.sticker_01;
     private URL url = null; //创建url对象 = 空
@@ -392,13 +493,16 @@ xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
         });
     }
 
-}</code></pre><p>到此我们的app就写的差不多了 现在就需要打包</p><p>3.打包apk（版本不一）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-12.png" alt="image.png" loading="lazy"></figure></p>
+}</code></pre>
+<h3 id="build-apk">打包 APK</h3>
+<p>功能调试完成后，通过 Android Studio 的构建菜单生成 APK。不同版本的菜单名称和位置可能略有差异，生成后可以在项目的输出目录中找到安装包。</p>
+<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-12.png" alt="Android Studio 构建 APK 菜单" loading="lazy"></figure>
     </article>
     <aside class="toc"><p>&#30446;&#24405;</p><nav data-toc></nav></aside>
   </main>
   <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
   <div class="search-modal" data-search-modal hidden><div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div><label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label><div class="search-results" data-search-results></div></div></div>
   <script src="assets/posts-data.js?v=yuque-20260819193439"></script>
-  <script src="assets/app.js?v=20260815-article-structure"></script>
+  <script src="assets/app.js?v=20260819-manual-structure"></script>
 </body>
 </html>

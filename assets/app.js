@@ -297,6 +297,13 @@
       return `${base || "section"}-${index + 1}`;
     };
 
+    if (container.dataset.structure === "manual") {
+      container.querySelectorAll("figure").forEach((figure) => {
+        figure.classList.add("article-media");
+      });
+      return;
+    }
+
     Array.from(container.querySelectorAll("p")).forEach((paragraph) => {
       const figures = Array.from(paragraph.children).filter((child) => child.tagName === "FIGURE");
       const text = paragraph.textContent.replace(/\u00a0/g, " ").trim();
