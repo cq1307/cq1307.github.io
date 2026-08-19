@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10201f">
+  <title>Android开发入门 - CQ_ Lab</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260815-article-structure">
+</head>
+<body data-page="post">
+  <div class="progress" id="progress"></div>
+  <header class="site-header compact">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="index.html">CQ_ Lab</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+      <div class="nav-menu">
+        <a href="index.html">&#39318;&#39029;</a>
+        <a href="archives.html">&#24402;&#26723;</a>
+        <a href="categories.html">&#20998;&#31867;</a>
+        <a href="tags.html">&#26631;&#31614;</a>
+        <a href="links.html">&#21451;&#38142;</a>
+        <a href="about.html">&#20851;&#20110;</a>
+        <button class="icon-button" type="button" data-open-search aria-label="Search">&#8981;</button>
+      </div>
+    </nav>
+    <section class="post-hero">
+      <p class="eyebrow">Android</p>
+      <h1>Android开发入门</h1>
+      <p>2026-08-19 &middot; 从 Android Studio 环境配置、APK 项目目录，到使用 XML 与 Java 完成图片切换应用并打包 APK 的完整入门记录。</p>
+    </section>
+  </header>
+  <main class="article-layout">
+    <article class="article-body" data-article>
+<h1 id="part-environment">一、Android 开发环境搭建</h1>
+<h2 id="iQXUE">开发环境配置</h2><p>1.开发工具：</p><p>Android Studio</p><p><a href="https://developer.android.com/studio?hl=zh-cn" target="_blank" rel="noreferrer">https://developer.android.com/studio?hl=zh-cn</a></p><p>官网提供了一些使用教程 自己查询即可</p><p>2.了解开发基础：   </p><p>构建工具----&gt;java需要编译，java写的安卓程序也需要被编译成----&gt;apk</p><p>       -java：Maven构建 --&gt; javaEE项目用的居多</p><p>       -安卓：官方推荐使用gradle构建安卓项目</p><p>#gradle和maven都是java项目的构建工具，但他们有一些区别：</p><p>1.语法:Gradle使用Groovy语言进行编写，而Maven使用XML格式做的.</p><p>   Groovy更加灵活易读，XML更加严谨易于重用</p><p>2.性能:Gradle比Maven更加高效快速，因为它使用了增量构建模式，只会重新构建被更改的模块，而Maven则需要重新构建整个项目</p><p>3.插件:Gradle的插件生态更加丰富和现代化，而Maven的件相对较为传统，此外，Gradle的插件可以非常容易地编写和定制，而Maven的描件相对繁琐。</p><p>4.维护:Maven有比较成熟的工具链和文档支持，而Gradle则相对较新，可能需要更多的自学</p><p>后续我们使用的就是gradle </p><p># Groovy介绍[了解]</p><p>Groovy是一种基于JVM (Java虚拟机)的敏捷开发语言，它结合了Python,Ruby和Smalltalk的许多强大的特性，Groovy 代码能够与Java代码很好地结合，也能用于扩展现有代码</p><p>3.SDK配置及环境变量问题</p><p>在安装完Android Studio后 大概率会因为SDK的下载配置问题报错</p><p>两个解决方法 ：</p><p>Android SDK换源   or“健康”上网方式在Android Studio配置中下载</p><p>更倾向于换源（但是我目前没有换，问就是懒，换源可以省下很多麻烦事）</p><p>SDK下载后 </p><p>#虚拟机文件</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-01.png" alt="image.png" loading="lazy"></figure></p><p>#移动接口</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-02.png" alt="image.png" loading="lazy"></figure></p><p>对这两个文件路径保存环境变量 挨着即可</p><h2 id="zzcdG">调试环境</h2><p>进入Android studio后新建项目 （目前只学了java）</p><p>选择Empty Views Activity（纯java开发）</p><p>进入开发界面会自动生成这个界面（先不管代码内容）</p><p>每次新建项目会重新下载Gradle（没换源记得出网创建）</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-03.png" alt="image.png" loading="lazy"></figure></p><h3 id="pgfGX">调试项目</h3><p>1.虚拟机调试</p><p>点击Android studio中的Devices Manager(版本不同位置不同)</p><p>新建虚拟机设备，自行了解适合自己的设备即可、</p><p><figure class="yuque-image"><img src="assets/images/posts/android/image-04.png" alt="image.png" loading="lazy"></figure></p><p>2.实机调试（推荐，实体机无需root）</p><p>使用实机打开开发者模式，打开USB调试，接入设备</p><p>使用之前环境配置的adb识别设备</p><pre><code>adb devices</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android/image-05.png" alt="image.png" loading="lazy"></figure></p><p>安装scrcpy</p><pre><code>winget install --exact Genymobile.scrcpy</code></pre><p>输入</p><pre><code>scrcpy</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android/image-06.png" alt="image.png" loading="lazy"></figure>而实机也可以在Android studio中参与运行调试</p>
+<h1 id="part-structure">二、Android APK 目录结构</h1>
+<p>Android studio提供两种视图方式</p><p>项目视图、安卓视图</p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-01.png" alt="image.png" loading="lazy"></figure></p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-02.png" alt="image.png" loading="lazy"></figure></p><p>project是设备中真实的项目结构              Android是更加清晰的内容展示</p><p>Android视图</p><p><figure class="yuque-image"><img src="assets/images/posts/android-apk/image-03.png" alt="image.png" loading="lazy"></figure></p><p>Project视图、</p><pre><code>Android 项目目录结构
+│
+├─ .gradle/                         # Gradle 自动生成的缓存目录，一般不用手动修改
+├─ .idea/                           # Android Studio 的项目配置目录，一般不用手动修改
+│
+├─ app/                             # app 模块，Android 开发最主要的工作目录
+│  │
+│  ├─ build/                        # 编译生成的文件，可删除，重新编译后会自动生成
+│  │
+│  ├─ libs/                         # 本地依赖库，例如 .jar / .aar 文件
+│  │
+│  ├─ src/                          # 源代码目录，非常重要
+│  │  │
+│  │  ├─ main/                     # APP 主程序代码
+│  │  │  │
+│  │  │  ├─ java/                  # Java / Kotlin 源代码
+│  │  │  │  └─ com.example.xxx/
+│  │  │  │     └─ MainActivity.java
+│  │  │  │
+│  │  │  ├─ res/                   # Android 资源目录
+│  │  │  │  │
+│  │  │  │  ├─ drawable/           # 图片、Shape、Vector Drawable 等资源
+│  │  │  │  │
+│  │  │  │  ├─ layout/             # XML 页面布局文件
+│  │  │  │  │  └─ activity_main.xml
+│  │  │  │  │
+│  │  │  │  ├─ mipmap-mdpi/        # mdpi 启动器图标
+│  │  │  │  ├─ mipmap-hdpi/        # hdpi 启动器图标
+│  │  │  │  ├─ mipmap-xhdpi/       # xhdpi 启动器图标
+│  │  │  │  ├─ mipmap-xxhdpi/      # xxhdpi 启动器图标
+│  │  │  │  ├─ mipmap-xxxhdpi/     # xxxhdpi 启动器图标
+│  │  │  │  ├─ mipmap-anydpi-v26/  # 自适应启动器图标
+│  │  │  │  │
+│  │  │  │  ├─ values/             # 字符串、颜色、主题等配置
+│  │  │  │  │  ├─ strings.xml
+│  │  │  │  │  ├─ colors.xml
+│  │  │  │  │  └─ themes.xml
+│  │  │  │  │
+│  │  │  │  └─ xml/                # 其他 XML 配置文件
+│  │  │  │
+│  │  │  └─ AndroidManifest.xml    # APP 清单配置文件
+│  │  │                            # 配置组件、权限、应用信息等
+│  │  │
+│  │  ├─ androidTest/              # Android 设备/模拟器测试代码
+│  │  └─ test/                     # 本地单元测试代码
+│  │
+│  ├─ .gitignore                   # app 模块 Git 忽略配置
+│  ├─ build.gradle.kts             # app 模块的 Gradle 构建配置，非常重要
+│  └─ proguard-rules.pro           # R8 / 代码压缩混淆相关规则
+│
+├─ gradle/
+│  └─ wrapper/
+│     ├─ gradle-wrapper.jar
+│     └─ gradle-wrapper.properties # Gradle Wrapper 版本配置
+│
+├─ .gitignore                      # 整个项目的 Git 忽略配置
+├─ build.gradle.kts                # 项目级 Gradle 构建配置
+├─ settings.gradle.kts             # 项目与模块配置
+├─ gradle.properties               # Gradle 全局项目配置
+├─ gradlew                         # Linux / macOS Gradle Wrapper
+├─ gradlew.bat                     # Windows Gradle Wrapper
+└─ local.properties                # 本机环境配置，例如 Android SDK 路径</code></pre>
+<h1 id="part-first-app">三、自己的第一个 Android App</h1>
+<h2 id="KwK1N">安卓开发流程预览</h2><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-01.png" alt="image.png" loading="lazy"></figure></p><p>简单概括一下流程：</p><p>1.用户打开app 进入首页（xml写的页面布局）</p><p>2.点开网页内容， Java/Kotlin 代码通过 HTTP/HTTPS 请求访问服务器提供的 API 接口。  </p><p>3.请求通过后端接收（用逻辑代码）再从数据库调用数据</p><p>4.后端返回的数据通过java数据加工返回页面</p><p>而逆向思路就很简单</p><p>apk----&gt;java/kotlin   </p><h2 id="g0qYO">第一个APP</h2><h3 id="HPFwW">1.编写主页面（xml）</h3><p>使用Android视图找res文件下的layout，其中的activity_main.xml就是主页面xml</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-02.png" alt="image.png" loading="lazy"></figure></p><p>xml编辑有code（纯代码）、split（边写边看）、design（图示化快捷开发）三种视图</p><p>#版本不同按钮位置不同</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-03.png" alt="image.png" loading="lazy"></figure></p><p>现在正式开始我们的第一款app开发！ </p><p>思来想去 整个图片选择器吧                            </p><p>                                                                           demo👇</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-04.png" alt="image.png" loading="lazy"></figure></p><p>首先使用LinearLayout把页面框架搭好</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;LinearLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/main&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+
+&lt;/LinearLayout&gt;</code></pre><p>开始页面的整体布局 我们需要一个图片的预标签和按钮标签</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;LinearLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/main&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+    &lt;!-- 第一个整体占满 --&gt;
+    &lt;!-- 19行 页面背景改颜色的函数，颜色在value列表中color.xml添加 --&gt;
+    &lt;!-- 21行 没有这个参数LinerLayout默认内部的内容水平排列 就看不到按钮 --&gt;
+
+    &lt;LinearLayout
+
+        android:layout_width=&quot;match_parent&quot;
+        android:background=&quot;@color/black&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;!-- 图片大小 --&gt;
+    &lt;ImageView
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;400dp&quot;
+        android:id=&quot;@+id/girl&quot;&gt;
+    &lt;/ImageView&gt;
+
+        &lt;Button
+            android:id=&quot;@+id/btn01&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:text=&quot;点击查看下一个&quot;&gt;
+
+        &lt;/Button&gt;
+    &lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;</code></pre><p>目前的效果：页面结构就这样草率完成了（体验体验即可）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-05.png" alt="image.png" loading="lazy"></figure></p><h3 id="p6WYo">2.java逻辑编写</h3><p>先明确需要的效果，图片框中有图片 点击切换按钮即可切换图片的动态效果</p><p>1.首先需要图片资源</p><p>图片资源都存放在res文件下的drawable中（对预选图片复制，点击drawable后粘贴）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-06.png" alt="image.png" loading="lazy"></figure></p><p>回到MainActivity开写java</p><p>1.基础框架</p><pre><code>package com.example.test_1;
+
+import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //执行父类的increate方法，不能删除必须写
+
+        setContentView(R.layout.activity_main);
+        //让java和对应的xml页面对应上 （绑定关系）
+
+        }
+    }</code></pre><p>2.实现按钮操作（点击）</p><pre><code>package com.example.test_1;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //执行父类的increate方法，不能删除必须写
+
+        setContentView(R.layout.activity_main);
+        //让java和对应的xml页面对应上 （绑定关系）
+
+        Button btn = findViewById(R.id.btn01);
+        //获取到标签对象值，让java通过id找到按钮
+        btn.setOnClickListener(new View.OnClickListener() {
+            //“btn，你从现在开始监听用户有没有点你。”
+            @Override
+            public void onClick(View v) {
+                //按钮真正被点击以后，会执行的方法。
+                Toast.makeText(MainActivity.this,&quot;换下一张&quot;,Toast.LENGTH_LONG).show();
+                //Toast是 Android 提供的一个类 专门用来做这种短暂提示
+                //.makeText(...) 创建一个文字 Toast
+                //Toast.makeText(
+                //    MainActivity.this,   // 在哪里显示
+                //    &quot;换下一张&quot;,          // 显示什么
+                //    Toast.LENGTH_LONG    // 显示多久
+                //)
+            }
+        });
+
+        }
+    }</code></pre><p>3.图片资源展示</p><pre><code>package com.example.test_1;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //执行父类的increate方法，不能删除必须写
+
+        setContentView(R.layout.activity_main);
+        //让java和对应的xml页面对应上 （绑定关系）
+
+        Button btn = findViewById(R.id.btn01);
+        //获取到标签对象值，让java通过id找到按钮
+        ImageView img = findViewById(R.id.girl);
+        //定位图片标签
+        img.setImageResource(R.drawable.sticker_01);
+        img.setImageResource(R.drawable.sticker_02);
+        img.setImageResource(R.drawable.sticker_03);
+        //向图片布局传入图片文件资源
+        btn.setOnClickListener(new View.OnClickListener() {
+            //“btn，你从现在开始监听用户有没有点你。”
+            @Override
+            public void onClick(View v) {
+                //按钮真正被点击以后，会执行的方法。
+                Toast.makeText(MainActivity.this,&quot;换下一张&quot;,Toast.LENGTH_LONG).show();
+                //Toast是 Android 提供的一个类 专门用来做这种短暂提示
+                //.makeText(...) 创建一个文字 Toast
+                //Toast.makeText(
+                //    MainActivity.this,   // 在哪里显示
+                //    &quot;换下一张&quot;,          // 显示什么
+                //    Toast.LENGTH_LONG    // 显示多久
+                //)
+            }
+        });
+
+        }
+    }</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-07.png" alt="image.png" loading="lazy"></figure></p><p>现在图片资源已经显示出来了 继续点击按钮实现切换效果</p><p>我这里先把btn和img重新声明一遍，并且给图片赋值给idimg<figure class="yuque-image"><img src="assets/images/posts/android-intro/image-08.png" alt="image.png" loading="lazy"></figure></p><p>顺手把下面的图片调用也改掉</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-09.png" alt="image.png" loading="lazy"></figure></p><p>那么改掉idimg的值就可以实现图片切换的效果了</p><p>而图片切换是在按钮效果下实现......所以</p><pre><code>Toast.makeText(MainActivity.this,&quot;换下一张&quot;,Toast.LENGTH_LONG).show();
+//Toast是 Android 提供的一个类 专门用来做这种短暂提示
+//.makeText(...) 创建一个文字 Toast
+//Toast.makeText(
+//    MainActivity.this,   // 在哪里显示
+//    &quot;换下一张&quot;,          // 显示什么
+//    Toast.LENGTH_LONG    // 显示多久
+if (idimg == R.drawable.sticker_01){
+    idimg = R.drawable.sticker_02;
+}else if(idimg == R.drawable.sticker_02){
+    idimg = R.drawable.sticker_03;
+}else{
+    idimg = R.drawable.sticker_01;
+}
+img.setImageResource(idimg);</code></pre><p>即可实现按钮图片的切换</p><p>4.将本地图片资源换为网络图片资源</p><p># 安卓要做网络资源加载，必须开启一个新的线程做，主线程只负责更新ui  -否则 主线程会卡死--&gt;直到网络请求回来---&gt;用户体验不好  -安卓强制必须开启线程加载，如果不开启，直接报错 </p><p># 1 手机能上网 </p><p># 2 代理关掉，其实也可以不关，因为咱开着抓包工具了，如果没开着，就需要关掉才能上网，正常做开发的时候默认就是关掉的</p><p># 3 AndroidManifest.xml配置上网权限，如下：</p><pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
+&lt;application
+...
+&lt;/application&gt;
+...
+&lt;!--加上下面这句话就是给你的app申请手机的上网权限 --&gt;
+&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;
+&lt;/manifest&gt;</code></pre><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-10.png" alt="image.png" loading="lazy"></figure></p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-11.png" alt="image.png" loading="lazy"></figure></p><p>(进程2改为线程)</p><p>图片资源案例</p><p><a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10" target="_blank" rel="noreferrer">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10</a></p><p>首先需要声明几个属性来接收图片网址，再去声明几个属性接收请求回来的图片资源数据（想让图片显示必须放上图片资源id）</p><pre><code>private ImageView img;
+    private Button btn;
+    private  int idimg = R.drawable.sticker_01;
+    private URL url = null; //创建url对象 = 空
+    private Bitmap bitmap = null;//专门存放数据资源的类型
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //执行父类的increate方法，不能删除必须写
+
+        setContentView(R.layout.activity_main);
+        //让java和对应的xml页面对应上 （绑定关系）
+
+        btn = findViewById(R.id.btn01);
+        //获取到标签对象值，让java通过id找到按钮
+        img = findViewById(R.id.girl);
+        //定位图片标签
+        img.setImageResource(idimg);
+        //向图片布局传入图片文件资源
+        btn.setOnClickListener(new View.OnClickListener() {
+            //“btn，你从现在开始监听用户有没有点你。”
+            @Override
+            public void onClick(View v) {
+                //按钮真正被点击以后，会执行的方法。
+                Toast.makeText(MainActivity.this,&quot;换个网络图片&quot;,Toast.LENGTH_LONG).show();
+                //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10
+                url = new URL(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10&quot;);
+            }
+        });
+
+    }
+}</code></pre><p>看似没问题但报错了，这是也许访问的url可能会访问出错，所以需要使用测试函数try来运行，以防整个进程嘎掉</p><pre><code> public void onClick(View v) {
+                //按钮真正被点击以后，会执行的方法。
+                Toast.makeText(MainActivity.this,&quot;换个网络图片&quot;,Toast.LENGTH_LONG).show();
+                //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10
+                try {
+                    url = new URL(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10&quot;);
+
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this,&quot;无法访问url&quot;,Toast.LENGTH_LONG).show();//按钮报错弹窗
+
+                }</code></pre><p>完整的调用网络url图片MainActivity如下</p><pre><code> private ImageView img;
+    private Button btn;
+    private  int idimg = R.drawable.sticker_01;
+    private URL url = null; //创建url对象 = 空
+    private Bitmap bitmap = null;//专门存放数据资源的类型
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //执行父类的increate方法，不能删除必须写
+
+        setContentView(R.layout.activity_main);
+        //让java和对应的xml页面对应上 （绑定关系）
+
+        btn = findViewById(R.id.btn01);
+        //获取到标签对象值，让java通过id找到按钮
+        img = findViewById(R.id.girl);
+        //定位图片标签
+        img.setImageResource(idimg);
+        //向图片布局传入图片文件资源
+        btn.setOnClickListener(new View.OnClickListener() {
+            //“btn，你从现在开始监听用户有没有点你。”
+            @Override
+            public void onClick(View v) {
+                //按钮真正被点击以后，会执行的方法。
+                Toast.makeText(MainActivity.this,&quot;换个网络图片&quot;,Toast.LENGTH_LONG).show();
+                //https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10
+                try {
+                    url = new URL(&quot;https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_MG6yskM5oGyCXbPzRwc7aAvZ58SVc3lXMMzU1d7mbO0ip2hcnnwfXutA&amp;s=10&quot;);
+                    //对url网址发送网络请求
+                    requestImage(url);
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this,&quot;加载图片资源失败&quot;,Toast.LENGTH_LONG).show();
+
+                Log.e(&quot;MainActivity&quot;,&quot;网络资源加载失败&quot;);//记录日志
+
+                }
+            }
+        });
+
+    }
+
+    private void requestImage(URL url){//开启线程做网络加载
+    new Thread(){
+        @Override
+        public void run() {
+        //线程逻辑的代码位置，现在线程需要加载网络图片
+            try {
+                bitmap = BitmapFactory.decodeStream(url.openStream());
+                //下载完了更新ui，也就是更新页面
+                showImage();
+            }catch (Exception e) {
+                Log.e(&quot;MainActivity&quot;,&quot;网络资源请求发送失败，加载图片请求失败&quot;,e);
+            }
+
+        }
+    }.start();
+
+    }
+
+    private void showImage(){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //这里写切换到主线程然后干什么
+                img.setImageBitmap(bitmap);
+            }
+        });
+    }
+
+}</code></pre><p>到此我们的app就写的差不多了 现在就需要打包</p><p>3.打包apk（版本不一）</p><p><figure class="yuque-image"><img src="assets/images/posts/android-intro/image-12.png" alt="image.png" loading="lazy"></figure></p>
+    </article>
+    <aside class="toc"><p>&#30446;&#24405;</p><nav data-toc></nav></aside>
+  </main>
+  <button class="top-button" type="button" data-back-top aria-label="Back to top">&uarr;</button>
+  <div class="search-modal" data-search-modal hidden><div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">&#25628;&#32034;</h2><button class="icon-button" type="button" data-close-search aria-label="Close search">&times;</button></div><label class="search-box"><span>&#20851;&#38190;&#35789;</span><input type="search" data-search-input autocomplete="off"></label><div class="search-results" data-search-results></div></div></div>
+  <script src="assets/posts-data.js?v=yuque-20260819193439"></script>
+  <script src="assets/app.js?v=20260815-article-structure"></script>
+</body>
+</html>
